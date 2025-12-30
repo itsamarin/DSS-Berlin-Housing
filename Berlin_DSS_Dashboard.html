@@ -320,6 +320,7 @@
                         <option value="Shared">Shared Room</option>
                     </select>
                 </div>
+                <p style="color: #cbd5e1; margin-top: 1rem; font-size: 0.9rem;">Filters update automatically as you change them</p>
             </div>
 
             <div style="overflow-x: auto;">
@@ -397,6 +398,7 @@
                     <label>Min Rating:</label>
                     <input type="number" id="matchRating" min="1" max="5" step="0.1" value="4.0">
                 </div>
+                <p style="color: #cbd5e1; margin-top: 1rem; font-size: 0.9rem;">Recommendations update automatically based on your preferences</p>
             </div>
 
             <h3 style="color: #f59e0b; margin: 2rem 0 1rem 0;">Top Recommendations</h3>
@@ -620,7 +622,22 @@
             const tbody = document.getElementById('tenantTableBody');
             tbody.innerHTML = '';
 
-            sampleListings.forEach(listing => {
+            // Get filter values
+            const districtFilter = document.getElementById('districtFilter').value;
+            const priceFilter = parseFloat(document.getElementById('priceFilter').value) || Infinity;
+            const roomTypeFilter = document.getElementById('roomTypeFilter').value;
+
+            // Filter listings
+            const filteredListings = sampleListings.filter(listing => {
+                const matchesDistrict = districtFilter === 'all' || listing.district === districtFilter;
+                const matchesPrice = listing.price <= priceFilter;
+                const matchesRoomType = roomTypeFilter === 'all' || listing.type === roomTypeFilter;
+
+                return matchesDistrict && matchesPrice && matchesRoomType;
+            });
+
+            // Display filtered results
+            filteredListings.forEach(listing => {
                 const row = `
                     <tr>
                         <td>${listing.name}</td>
@@ -634,6 +651,11 @@
                 `;
                 tbody.innerHTML += row;
             });
+
+            // Show message if no results
+            if (filteredListings.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="7" style="text-align: center; padding: 2rem; color: #cbd5e1;">No accommodations match your filters. Try adjusting your criteria.</td></tr>';
+            }
         }
 
         // Generate Recommendations
@@ -685,6 +707,16 @@
                 container.innerHTML += card;
             });
         }
+
+        // Attach event listeners to filters
+        document.getElementById('districtFilter').addEventListener('change', populateTenantTable);
+        document.getElementById('priceFilter').addEventListener('input', populateTenantTable);
+        document.getElementById('roomTypeFilter').addEventListener('change', populateTenantTable);
+
+        // Attach event listeners to matching filters
+        document.getElementById('matchBudget').addEventListener('input', generateRecommendations);
+        document.getElementById('matchDistrict').addEventListener('change', generateRecommendations);
+        document.getElementById('matchRating').addEventListener('input', generateRecommendations);
 
         // Initialize
         populateTenantTable();

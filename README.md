@@ -38,18 +38,32 @@ python -m http.server 8000
 
 ```
 DSS-Berlin-Housing/
-├── data/
-│   ├── original/          # Raw datasets (accommodations_raw.csv, tenants_raw.csv)
-│   └── cleaned/           # Processed datasets (accommodations_cleaned.csv, tenants_cleaned.csv)
-├── models/                # Analytical models (matching, prediction, fraud detection)
-├── dashboard/             # Interactive web dashboard (Berlin_DSS_Dashboard.html)
-├── docs/                  # Project documentation
-├── index.html             # Landing page
-├── README.md              # This file
-├── LICENSE                # MIT License
-├── CONTRIBUTING.md        # Contribution guidelines
-├── DEPLOYMENT_GUIDE.md    # Deployment instructions
-└── QUICK_START.md         # Quick start guide
+├── data/                              # Data files
+│   ├── original/                      # Raw, unprocessed datasets
+│   │   └── README.md                  # Original data documentation
+│   └── cleaned/                       # Processed, cleaned datasets
+│       └── README.md                  # Cleaned data documentation
+│
+├── models/                            # Data models and analytical models
+│   └── README.md                      # Models documentation
+│
+├── dashboard/                         # Interactive web dashboard
+│   ├── Berlin_DSS_Dashboard.html     # Main dashboard file
+│   ├── README.md                      # Dashboard documentation
+│   └── DASHBOARD_COMPONENTS.md       # Detailed component descriptions
+│
+├── docs/                              # Project documentation
+│   └── README.md                      # Documentation index
+│
+├── index.html                         # Landing page
+├── README.md                          # This file
+├── LICENSE                            # MIT License
+├── CONTRIBUTING.md                    # Contribution guidelines
+├── DEPLOYMENT_GUIDE.md                # Deployment instructions
+├── QUICK_START.md                     # Quick start guide
+├── setup.sh                           # Setup script for Unix/Linux/macOS
+├── setup.bat                          # Setup script for Windows
+└── .gitignore                         # Git ignore configuration
 ```
 
 ## Data Overview

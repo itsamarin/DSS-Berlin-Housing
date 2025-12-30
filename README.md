@@ -9,7 +9,7 @@ An interactive web-based Decision Support System for analyzing Berlin's accommod
 ## Features
 
 ### Real-Time Analytics Dashboard
-- Interactive visualizations of 2,319+ accommodation listings
+- Interactive visualizations of 2,319+ accommodation listings (demo shows 1,000 sample listings)
 - 2,000+ tenant profiles with booking history
 - Live filtering and data exploration
 
@@ -21,17 +21,18 @@ Our intelligent matching system scores properties based on:
 - **Verification Status** (20% weight)
 
 ### Multi-View Interface
-1. **Overview Dashboard** - Market insights and key metrics
-2. **Tenant View** - Find your perfect accommodation
-3. **Landlord Analytics** - Optimize occupancy and revenue
-4. **Smart Matching** - AI-powered recommendations
+1. **Overview Dashboard** - Market insights and key metrics from 1,000+ listings
+2. **Find Accommodation** - Browse all listings, filter by preferences, and get AI-powered recommendations
+3. **Landlord Analytics** - Optimize occupancy and revenue with performance insights
 
 ## Quick Start
 
 ### Option 1: View Online (Easiest)
-Visit the live demo: **[https://itsamarin.github.io/DSS-Berlin-Housing/](https://itsamarin.github.io/DSS-Berlin-Housing/)**
+**Landing Page:** [https://itsamarin.github.io/DSS-Berlin-Housing/](https://itsamarin.github.io/DSS-Berlin-Housing/)
 
-Click the "Open Dashboard" button on the landing page to launch the interactive dashboard.
+**Direct Dashboard Access:** [https://itsamarin.github.io/DSS-Berlin-Housing/Berlin_DSS_Dashboard.html](https://itsamarin.github.io/DSS-Berlin-Housing/Berlin_DSS_Dashboard.html)
+
+The dashboard features 1,000 property listings with real-time filtering and smart matching capabilities.
 
 ### Option 2: Run Locally
 

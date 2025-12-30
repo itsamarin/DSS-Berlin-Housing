@@ -79,11 +79,6 @@
             border-color: #f59e0b;
         }
 
-        .tab:nth-child(4):hover {
-            background: rgba(236, 72, 153, 0.3);
-            border-color: #ec4899;
-        }
-
         .tab.active {
             color: #0f172a;
         }
@@ -98,10 +93,6 @@
 
         .tab:nth-child(3).active {
             background: linear-gradient(135deg, #f59e0b, #d97706);
-        }
-
-        .tab:nth-child(4).active {
-            background: linear-gradient(135deg, #ec4899, #db2777);
         }
 
         .tab-content {
@@ -353,9 +344,8 @@
 
         <div class="tabs">
             <div class="tab active" onclick="switchTab('overview')">Overview Dashboard</div>
-            <div class="tab" onclick="switchTab('tenant')">Tenant View</div>
+            <div class="tab" onclick="switchTab('tenant')">Find Accommodation</div>
             <div class="tab" onclick="switchTab('landlord')">Landlord Analytics</div>
-            <div class="tab" onclick="switchTab('matching')">Smart Matching</div>
         </div>
 
         <!-- Overview Dashboard -->
@@ -399,11 +389,41 @@
             </div>
         </div>
 
-        <!-- Tenant View -->
+        <!-- Find Accommodation (Combined Tenant View + Smart Matching) -->
         <div id="tenant" class="tab-content">
-            <h2 style="margin-bottom: 1.5rem; color: #f59e0b;">Find Your Perfect Accommodation</h2>
+            <h2 style="margin-bottom: 1.5rem; color: #34d399;">Find Your Perfect Accommodation</h2>
 
-            <div class="filters">
+            <!-- Smart Matching Section -->
+            <div class="filters" style="background: linear-gradient(135deg, rgba(236, 72, 153, 0.2), rgba(147, 51, 234, 0.15)); border-left: 4px solid #ec4899;">
+                <h3 style="color: #f9a8d4; margin-bottom: 1rem;">🎯 AI-Powered Smart Matching</h3>
+                <p style="color: #e0e7ff; margin-bottom: 1rem; font-size: 0.95rem;">Get personalized recommendations based on your preferences</p>
+                <div class="filter-group">
+                    <label>Budget (€):</label>
+                    <input type="number" id="matchBudget" placeholder="1000" value="1000">
+
+                    <label>Preferred District:</label>
+                    <select id="matchDistrict">
+                        <option value="Mitte">Mitte</option>
+                        <option value="Kreuzberg">Kreuzberg</option>
+                        <option value="Friedrichshain">Friedrichshain</option>
+                        <option value="Charlottenburg">Charlottenburg</option>
+                        <option value="Prenzlauer Berg">Prenzlauer Berg</option>
+                    </select>
+
+                    <label>Min Rating:</label>
+                    <input type="number" id="matchRating" min="1" max="5" step="0.1" value="4.0">
+
+                    <button onclick="generateRecommendations()" style="padding: 0.75rem 2rem; background: linear-gradient(135deg, #ec4899, #db2777); color: white; border: none; border-radius: 8px; font-weight: bold; cursor: pointer; margin-top: 0.5rem;">Find Best Matches</button>
+                </div>
+            </div>
+
+            <h3 style="color: #f9a8d4; margin: 2rem 0 1rem 0;">Top Recommendations</h3>
+            <div id="recommendationsContainer"></div>
+
+            <!-- Browse All Listings Section -->
+            <h2 style="margin: 3rem 0 1.5rem 0; color: #60a5fa;">Browse All Listings</h2>
+            <div class="filters" style="background: linear-gradient(135deg, rgba(59, 130, 246, 0.15), rgba(16, 185, 129, 0.15));">
+                <h3 style="color: #60a5fa; margin-bottom: 1rem;">🔍 Filter Search</h3>
                 <div class="filter-group">
                     <label>District:</label>
                     <select id="districtFilter">
@@ -426,11 +446,11 @@
                         <option value="Shared">Shared Room</option>
                     </select>
 
-                    <button onclick="populateTenantTable()" style="padding: 0.75rem 2rem; background: #f59e0b; color: #0f172a; border: none; border-radius: 8px; font-weight: bold; cursor: pointer; margin-top: 0.5rem;">Search Accommodations</button>
+                    <button onclick="populateTenantTable()" style="padding: 0.75rem 2rem; background: linear-gradient(135deg, #3b82f6, #2563eb); color: white; border: none; border-radius: 8px; font-weight: bold; cursor: pointer; margin-top: 0.5rem;">Search Listings</button>
                 </div>
             </div>
 
-            <div style="overflow-x: auto;">
+            <div style="overflow-x: auto; margin-top: 1.5rem;">
                 <table id="tenantTable">
                     <thead>
                         <tr>
@@ -484,48 +504,56 @@
             </div>
         </div>
 
-        <!-- Smart Matching -->
-        <div id="matching" class="tab-content">
-            <h2 style="margin-bottom: 1.5rem; color: #f59e0b;">AI-Powered Property Matching</h2>
-
-            <div class="filters">
-                <h3 style="color: #f59e0b; margin-bottom: 1rem;">Your Preferences</h3>
-                <div class="filter-group">
-                    <label>Budget (€):</label>
-                    <input type="number" id="matchBudget" placeholder="1000" value="1000">
-
-                    <label>Preferred District:</label>
-                    <select id="matchDistrict">
-                        <option value="Mitte">Mitte</option>
-                        <option value="Kreuzberg">Kreuzberg</option>
-                        <option value="Friedrichshain">Friedrichshain</option>
-                        <option value="Charlottenburg">Charlottenburg</option>
-                    </select>
-
-                    <label>Min Rating:</label>
-                    <input type="number" id="matchRating" min="1" max="5" step="0.1" value="4.0">
-
-                    <button onclick="generateRecommendations()" style="padding: 0.75rem 2rem; background: #f59e0b; color: #0f172a; border: none; border-radius: 8px; font-weight: bold; cursor: pointer; margin-top: 0.5rem;">Find Matches</button>
-                </div>
-            </div>
-
-            <h3 style="color: #f59e0b; margin: 2rem 0 1rem 0;">Top Recommendations</h3>
-            <div id="recommendationsContainer"></div>
-        </div>
     </div>
 
     <script>
-        // Sample Data
-        const sampleListings = [
-            { id: 1, name: "Cozy Apartment in Mitte", district: "Mitte", type: "Entire", price: 1200, rating: 4.5, distance: 2.1, verified: true },
-            { id: 2, name: "Modern Studio Kreuzberg", district: "Kreuzberg", type: "Private", price: 850, rating: 4.3, distance: 3.5, verified: true },
-            { id: 3, name: "Spacious Loft Friedrichshain", district: "Friedrichshain", type: "Entire", price: 1400, rating: 4.7, distance: 4.2, verified: true },
-            { id: 4, name: "Charming Room Charlottenburg", district: "Charlottenburg", type: "Private", price: 750, rating: 4.1, distance: 5.8, verified: false },
-            { id: 5, name: "Luxury Penthouse Mitte", district: "Mitte", type: "Entire", price: 2200, rating: 4.9, distance: 1.5, verified: true },
-            { id: 6, name: "Budget Room Prenzlauer Berg", district: "Prenzlauer Berg", type: "Shared", price: 450, rating: 3.8, distance: 4.8, verified: true },
-            { id: 7, name: "Central Apartment Kreuzberg", district: "Kreuzberg", type: "Entire", price: 1100, rating: 4.4, distance: 3.2, verified: true },
-            { id: 8, name: "Artistic Space Friedrichshain", district: "Friedrichshain", type: "Private", price: 900, rating: 4.6, distance: 4.5, verified: true },
-        ];
+        // Generate 1000 sample listings programmatically
+        function generateListings() {
+            const districts = ["Mitte", "Kreuzberg", "Friedrichshain", "Charlottenburg", "Prenzlauer Berg"];
+            const types = ["Entire", "Private", "Shared"];
+            const adjectives = ["Cozy", "Modern", "Spacious", "Charming", "Luxury", "Budget", "Central", "Artistic",
+                               "Bright", "Elegant", "Classic", "Downtown", "Affordable", "Quiet", "Beautiful",
+                               "Minimalist", "Designer", "Furnished", "Sunny", "Premium", "Urban", "Stylish",
+                               "Contemporary", "Traditional", "Renovated", "Historic", "Trendy", "Comfortable"];
+            const propertyTypes = ["Apartment", "Studio", "Loft", "Room", "Penthouse", "Flat", "Suite", "Space"];
+
+            const listings = [];
+
+            for (let i = 1; i <= 1000; i++) {
+                const district = districts[Math.floor(Math.random() * districts.length)];
+                const type = types[Math.floor(Math.random() * types.length)];
+                const adjective = adjectives[Math.floor(Math.random() * adjectives.length)];
+                const propertyType = propertyTypes[Math.floor(Math.random() * propertyTypes.length)];
+
+                // Price based on type
+                let basePrice = type === "Entire" ? 1200 : (type === "Private" ? 750 : 500);
+                const price = basePrice + Math.floor(Math.random() * 1000) - 200;
+
+                // Rating between 3.5 and 5.0
+                const rating = (3.5 + Math.random() * 1.5).toFixed(1);
+
+                // Distance between 1 and 7 km
+                const distance = (1 + Math.random() * 6).toFixed(1);
+
+                // 80% verified
+                const verified = Math.random() > 0.2;
+
+                listings.push({
+                    id: i,
+                    name: `${adjective} ${propertyType} ${district}`,
+                    district: district,
+                    type: type,
+                    price: Math.max(400, price),
+                    rating: parseFloat(rating),
+                    distance: parseFloat(distance),
+                    verified: verified
+                });
+            }
+
+            return listings;
+        }
+
+        const sampleListings = generateListings();
 
         // Tab Switching
         function switchTab(tabName) {

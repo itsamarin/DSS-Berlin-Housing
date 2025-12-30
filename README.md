@@ -31,6 +31,8 @@ Our intelligent matching system scores properties based on:
 ### Option 1: View Online (Easiest)
 Visit the live demo: **[https://itsamarin.github.io/DSS-Berlin-Housing/](https://itsamarin.github.io/DSS-Berlin-Housing/)**
 
+Click the "Open Dashboard" button on the landing page to launch the interactive dashboard.
+
 ### Option 2: Run Locally
 
 1. **Clone the repository**

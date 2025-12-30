@@ -1,6 +1,6 @@
 # Berlin Housing Decision Support System (DSS)
 
-[![Live Demo](https://img.shields.io/badge/demo-live-success)](https://itsamarin.github.io/DSS-for-Accommodation-Matching-and-Occupancy-Optimization-in-Berlin/)
+[![Live Demo](https://img.shields.io/badge/demo-live-success)](https://itsamarin.github.io/DSS-Berlin-Housing/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 [![Data](https://img.shields.io/badge/data-2319%20listings-orange)](data/)
 
@@ -29,14 +29,14 @@ Our intelligent matching system scores properties based on:
 ## Quick Start
 
 ### Option 1: View Online (Easiest)
-Visit the live demo: **[https://itsamarin.github.io/DSS-for-Accommodation-Matching-and-Occupancy-Optimization-in-Berlin/](https://itsamarin.github.io/DSS-for-Accommodation-Matching-and-Occupancy-Optimization-in-Berlin/)**
+Visit the live demo: **[https://itsamarin.github.io/DSS-Berlin-Housing/](https://itsamarin.github.io/DSS-Berlin-Housing/)**
 
 ### Option 2: Run Locally
 
 1. **Clone the repository**
 ```bash
-git clone https://github.com/itsamarin/DSS-for-Accommodation-Matching-and-Occupancy-Optimization-in-Berlin.git
-cd DSS-for-Accommodation-Matching-and-Occupancy-Optimization-in-Berlin
+git clone https://github.com/itsamarin/DSS-Berlin-Housing.git
+cd DSS-Berlin-Housing
 ```
 
 2. **Open in browser**
@@ -183,7 +183,7 @@ new Chart(document.getElementById('myChart'), {
 
 2. **Your site will be live at:**
    ```
-   https://itsamarin.github.io/DSS-for-Accommodation-Matching-and-Occupancy-Optimization-in-Berlin/
+   https://itsamarin.github.io/DSS-Berlin-Housing/
    ```
 
 3. **Custom Domain (Optional)**
@@ -274,4 +274,4 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 **Made for the Berlin housing community**
 
-[Report Bug](https://github.com/itsamarin/DSS-for-Accommodation-Matching-and-Occupancy-Optimization-in-Berlin/issues) · [Request Feature](https://github.com/itsamarin/DSS-for-Accommodation-Matching-and-Occupancy-Optimization-in-Berlin/issues) · [Live Demo](https://itsamarin.github.io/DSS-for-Accommodation-Matching-and-Occupancy-Optimization-in-Berlin/)
+[Report Bug](https://github.com/itsamarin/DSS-Berlin-Housing/issues) · [Request Feature](https://github.com/itsamarin/DSS-Berlin-Housing/issues) · [Live Demo](https://itsamarin.github.io/DSS-Berlin-Housing/)

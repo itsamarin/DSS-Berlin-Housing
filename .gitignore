@@ -1,0 +1,49 @@
+# Ignore everything by default
+*
+
+# But track these folders and their contents
+!data/
+!data/**
+!models/
+!models/**
+!dashboard/
+!dashboard/**
+!docs/
+!docs/**
+
+# Track essential project files in root
+!index.html
+!README.md
+!LICENSE
+!CONTRIBUTING.md
+!DEPLOYMENT_GUIDE.md
+!QUICK_START.md
+!setup.sh
+!setup.bat
+!.gitignore
+
+# Ignore system files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Ignore IDE/Editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Ignore temporary files
+*.tmp
+*.temp
+*.log
+*.cache
+
+# Ignore OS generated files
+*.bak
+*.backup

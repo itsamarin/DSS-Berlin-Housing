@@ -22,7 +22,7 @@ Our intelligent matching system scores properties based on:
 
 ### Multi-View Interface
 1. **Overview Dashboard** - Market insights and key metrics from 1,000+ listings
-2. **Find Accommodation** - Browse all listings, filter by preferences, and get AI-powered recommendations
+2. **Tenant View** - Browse all listings, filter by preferences, and get AI-powered recommendations
 3. **Landlord Analytics** - Optimize occupancy and revenue with performance insights
 
 ## Quick Start
@@ -151,22 +151,22 @@ DSS-Berlin-Housing/
 
 ## Documentation
 
-Comprehensive guides available in the `docs/` folder:
+Project documentation is organized in the repository:
 
-1. **[PowerBI_Implementation_Guide.md](docs/PowerBI_Implementation_Guide.md)**
-   - Step-by-step Power BI setup
-   - Data modeling instructions
-   - Publishing to Microsoft 365
+### Getting Started Guides
+- **[QUICK_START.md](QUICK_START.md)** - Quick start guide for using the DSS
+- **[DEPLOYMENT_GUIDE.md](DEPLOYMENT_GUIDE.md)** - Deployment instructions for GitHub Pages
+- **[CONTRIBUTING.md](CONTRIBUTING.md)** - Guidelines for contributing to the project
 
-2. **[DAX_Quick_Reference.md](docs/DAX_Quick_Reference.md)**
-   - 50+ ready-to-use DAX formulas
-   - KPI calculations
-   - Matching algorithm measures
+### Folder Documentation
+- **[data/original/README.md](data/original/README.md)** - Original dataset documentation
+- **[data/cleaned/README.md](data/cleaned/README.md)** - Cleaned dataset documentation
+- **[models/README.md](models/README.md)** - Analytical models documentation
+- **[dashboard/README.md](dashboard/README.md)** - Dashboard usage and customization guide
+- **[docs/README.md](docs/README.md)** - Additional documentation index
 
-3. **[Dashboard_Layout_Guide.md](docs/Dashboard_Layout_Guide.md)**
-   - Visual design specifications
-   - Color palettes and typography
-   - Layout templates
+### Additional Resources
+For Power BI implementation, DAX formulas, and advanced dashboard customization, refer to the `docs/` folder for future guides (coming soon).
 
 ## Customization
 

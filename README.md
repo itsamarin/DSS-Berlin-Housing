@@ -30,7 +30,7 @@ Our intelligent matching system scores properties based on:
 ### Option 1: View Online (Easiest)
 **Landing Page:** [https://itsamarin.github.io/DSS-Berlin-Housing/](https://itsamarin.github.io/DSS-Berlin-Housing/)
 
-**Direct Dashboard Access:** [https://itsamarin.github.io/DSS-Berlin-Housing/Berlin_DSS_Dashboard.html](https://itsamarin.github.io/DSS-Berlin-Housing/Berlin_DSS_Dashboard.html)
+**Direct Dashboard Access:** [https://itsamarin.github.io/DSS-Berlin-Housing/dashboard/Berlin_DSS_Dashboard.html](https://itsamarin.github.io/DSS-Berlin-Housing/dashboard/Berlin_DSS_Dashboard.html)
 
 The dashboard features 1,000 property listings with real-time filtering and smart matching capabilities.
 
@@ -45,11 +45,11 @@ cd DSS-Berlin-Housing
 2. **Open in browser**
 ```bash
 # Simply open the HTML file
-open Berlin_DSS_Dashboard.html
+open dashboard/Berlin_DSS_Dashboard.html
 
 # Or use a local server (recommended)
 python -m http.server 8000
-# Then visit: http://localhost:8000
+# Then visit: http://localhost:8000/dashboard/Berlin_DSS_Dashboard.html
 ```
 
 No installation or dependencies required.
@@ -57,7 +57,37 @@ No installation or dependencies required.
 ## Repository Structure
 
 ```
-berlin-housing-dss/
+DSS-Berlin-Housing/
+├── data/                              # Data files
+│   ├── original/                      # Raw, unprocessed datasets
+│   │   ├── README.md                  # Original data documentation
+│   │   ├── accommodations_raw.csv     # Raw accommodation listings
+│   │   └── tenants_raw.csv            # Raw tenant profiles
+│   └── cleaned/                       # Processed, cleaned datasets
+│       ├── README.md                  # Cleaned data documentation
+│       ├── accommodations_cleaned.csv # Cleaned accommodation data
+│       ├── tenants_cleaned.csv        # Cleaned tenant data
+│       └── data_quality_report.pdf    # Data cleaning report
+│
+├── models/                            # Data models and analytical models
+│   ├── README.md                      # Models documentation
+│   ├── data_model.pdf                 # Entity-relationship diagram
+│   ├── matching_algorithm.py          # AI matching implementation
+│   ├── occupancy_prediction.py        # Occupancy forecasting
+│   ├── revenue_forecast.py            # Revenue prediction
+│   └── fraud_detection_rules.json     # Verification rules
+│
+├── dashboard/                         # Interactive web dashboard
+│   ├── README.md                      # Dashboard documentation
+│   └── Berlin_DSS_Dashboard.html      # Main dashboard file
+│
+├── docs/                              # Project documentation
+│   ├── README.md                      # Documentation index
+│   ├── PowerBI_Implementation_Guide.md
+│   ├── DAX_Quick_Reference.md
+│   └── Dashboard_Layout_Guide.md
+│
+├── index.html                         # Landing page
 ├── README.md                          # This file
 ├── LICENSE                            # MIT License
 ├── CONTRIBUTING.md                    # Contribution guidelines
@@ -141,7 +171,7 @@ Comprehensive guides available in the `docs/` folder:
 ## Customization
 
 ### Update Data
-Replace `dashboard_data.json` with your own data:
+Update the data generation in `dashboard/Berlin_DSS_Dashboard.html`:
 
 ```javascript
 {
@@ -154,7 +184,7 @@ Replace `dashboard_data.json` with your own data:
 ```
 
 ### Modify Colors
-Edit CSS variables in `Berlin_DSS_Dashboard.html`:
+Edit CSS variables in `dashboard/Berlin_DSS_Dashboard.html`:
 
 ```css
 :root {

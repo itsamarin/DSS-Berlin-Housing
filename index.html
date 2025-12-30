@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Interactive Decision Support System for analyzing Berlin's accommodation market, helping tenants find perfect homes and landlords optimize occupancy.">
+    <meta name="keywords" content="Berlin, housing, accommodation, decision support system, DSS, data visualization">
+    <meta name="author" content="itsamarin">
+    <title>Berlin Housing Decision Support System (DSS)</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #333;
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+            flex: 1;
+        }
+
+        header {
+            text-align: center;
+            padding: 3rem 0;
+            color: white;
+        }
+
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .subtitle {
+            font-size: 1.3rem;
+            opacity: 0.9;
+            margin-bottom: 2rem;
+        }
+
+        .badges {
+            display: flex;
+            justify-content: center;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+            margin: 1.5rem 0;
+        }
+
+        .badge {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            backdrop-filter: blur(10px);
+        }
+
+        .main-content {
+            background: white;
+            border-radius: 20px;
+            padding: 3rem;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            margin-bottom: 2rem;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .feature-card {
+            background: #f8f9fa;
+            padding: 2rem;
+            border-radius: 15px;
+            border-left: 4px solid #667eea;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .feature-card h3 {
+            color: #667eea;
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+
+        .feature-card ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .feature-card li {
+            padding: 0.5rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .feature-card li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #667eea;
+            font-weight: bold;
+        }
+
+        .cta-section {
+            text-align: center;
+            margin: 3rem 0;
+            padding: 2rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 15px;
+            color: white;
+        }
+
+        .cta-section h2 {
+            margin-bottom: 1.5rem;
+            font-size: 2rem;
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 1.5rem;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 1rem 2rem;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            border: 2px solid white;
+        }
+
+        .btn-primary {
+            background: white;
+            color: #667eea;
+        }
+
+        .btn-primary:hover {
+            background: transparent;
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: white;
+        }
+
+        .btn-secondary:hover {
+            background: white;
+            color: #667eea;
+            transform: translateY(-2px);
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .stat-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 1.5rem;
+            border-radius: 15px;
+            color: white;
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            font-size: 1rem;
+            opacity: 0.9;
+        }
+
+        .tech-stack {
+            margin: 2rem 0;
+            padding: 2rem;
+            background: #f8f9fa;
+            border-radius: 15px;
+        }
+
+        .tech-stack h3 {
+            margin-bottom: 1rem;
+            color: #667eea;
+        }
+
+        .tech-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+        }
+
+        .tech-tag {
+            background: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            border: 2px solid #667eea;
+            color: #667eea;
+            font-weight: 500;
+        }
+
+        footer {
+            text-align: center;
+            padding: 2rem;
+            color: white;
+            background: rgba(0,0,0,0.2);
+        }
+
+        footer a {
+            color: white;
+            text-decoration: none;
+            margin: 0 1rem;
+            transition: opacity 0.3s;
+        }
+
+        footer a:hover {
+            opacity: 0.8;
+            text-decoration: underline;
+        }
+
+        .note {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 1rem;
+            margin: 2rem 0;
+            border-radius: 5px;
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+
+            .subtitle {
+                font-size: 1.1rem;
+            }
+
+            .main-content {
+                padding: 1.5rem;
+            }
+
+            .btn-group {
+                flex-direction: column;
+            }
+
+            .btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Berlin Housing Decision Support System</h1>
+            <p class="subtitle">Interactive web-based analytics for Berlin's accommodation market</p>
+
+            <div class="badges">
+                <span class="badge">2,319+ Listings</span>
+                <span class="badge">2,000+ Tenant Profiles</span>
+                <span class="badge">12 Districts</span>
+                <span class="badge">AI-Powered Matching</span>
+            </div>
+        </header>
+
+        <div class="main-content">
+            <div class="cta-section" style="margin-top: 0;">
+                <h2>Launch Interactive Dashboard</h2>
+                <p style="font-size: 1.1rem; margin-bottom: 1rem;">Experience the full-featured Decision Support System with real-time analytics</p>
+                <div class="btn-group">
+                    <a href="Berlin_DSS_Dashboard.html" class="btn btn-primary">Open Dashboard</a>
+                </div>
+            </div>
+
+            <div class="stats">
+                <div class="stat-card">
+                    <span class="stat-number">2,319</span>
+                    <span class="stat-label">Accommodation Listings</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-number">2,000</span>
+                    <span class="stat-label">Tenant Profiles</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-number">12</span>
+                    <span class="stat-label">Berlin Districts</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-number">4.2/5</span>
+                    <span class="stat-label">Avg. Satisfaction</span>
+                </div>
+            </div>
+
+            <h2 style="text-align: center; margin: 3rem 0 2rem 0; color: #667eea;">Key Features</h2>
+
+            <div class="features-grid">
+                <div class="feature-card">
+                    <h3>Real-Time Analytics Dashboard</h3>
+                    <ul>
+                        <li>Interactive visualizations of 2,319+ accommodation listings</li>
+                        <li>2,000+ tenant profiles with booking history</li>
+                        <li>Live filtering and data exploration</li>
+                    </ul>
+                </div>
+
+                <div class="feature-card">
+                    <h3>Smart Matching Algorithm</h3>
+                    <ul>
+                        <li>Price Affordability (30% weight)</li>
+                        <li>Location Proximity (20% weight)</li>
+                        <li>Guest Satisfaction (30% weight)</li>
+                        <li>Verification Status (20% weight)</li>
+                    </ul>
+                </div>
+
+                <div class="feature-card">
+                    <h3>Multi-View Interface</h3>
+                    <ul>
+                        <li>Overview Dashboard - Market insights</li>
+                        <li>Tenant View - Find accommodations</li>
+                        <li>Landlord Analytics - Optimize occupancy</li>
+                        <li>Smart Matching - AI recommendations</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="tech-stack">
+                <h3>Technology Stack</h3>
+                <div class="tech-tags">
+                    <span class="tech-tag">HTML5</span>
+                    <span class="tech-tag">CSS3</span>
+                    <span class="tech-tag">JavaScript ES6+</span>
+                    <span class="tech-tag">Chart.js</span>
+                    <span class="tech-tag">No Backend Required</span>
+                    <span class="tech-tag">GitHub Pages</span>
+                </div>
+            </div>
+
+            <div class="cta-section">
+                <h2>Get Started</h2>
+                <p style="font-size: 1.1rem; margin-bottom: 1rem;">Explore the Berlin housing market with our interactive Decision Support System</p>
+                <div class="btn-group">
+                    <a href="https://github.com/itsamarin/DSS-for-Accommodation-Matching-and-Occupancy-Optimization-in-Berlin" class="btn btn-primary" target="_blank">View on GitHub</a>
+                    <a href="https://github.com/itsamarin/DSS-for-Accommodation-Matching-and-Occupancy-Optimization-in-Berlin/blob/main/README.md" class="btn btn-secondary" target="_blank">Documentation</a>
+                </div>
+            </div>
+
+            <div style="margin-top: 3rem; padding: 2rem; background: #f8f9fa; border-radius: 15px;">
+                <h3 style="color: #667eea; margin-bottom: 1rem;">Project Background</h3>
+                <p style="margin-bottom: 1rem;">This Decision Support System was developed to address Berlin's housing challenges:</p>
+                <ul style="list-style: none; padding-left: 0;">
+                    <li style="padding: 0.5rem 0; padding-left: 1.5rem; position: relative;">
+                        <strong>Problem:</strong> Tenants face payment fragmentation, listing verification issues, and occupancy uncertainty
+                    </li>
+                    <li style="padding: 0.5rem 0; padding-left: 1.5rem; position: relative;">
+                        <strong>Solution:</strong> Integrated platform with verified listings, fraud detection, and occupancy optimization
+                    </li>
+                    <li style="padding: 0.5rem 0; padding-left: 1.5rem; position: relative;">
+                        <strong>Approach:</strong> Hybrid DSS combining Model-Driven, Data-Driven, and Knowledge-Driven components
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>Made for the Berlin housing community</p>
+        <p style="margin-top: 1rem;">
+            <a href="https://github.com/itsamarin/DSS-for-Accommodation-Matching-and-Occupancy-Optimization-in-Berlin" target="_blank">GitHub</a>
+            <a href="https://github.com/itsamarin/DSS-for-Accommodation-Matching-and-Occupancy-Optimization-in-Berlin/issues" target="_blank">Report Bug</a>
+            <a href="https://github.com/itsamarin/DSS-for-Accommodation-Matching-and-Occupancy-Optimization-in-Berlin/issues" target="_blank">Request Feature</a>
+        </p>
+        <p style="margin-top: 1rem; font-size: 0.9rem; opacity: 0.8;">
+            © 2025 Berlin Housing DSS | MIT License
+        </p>
+    </footer>
+</body>
+</html>

@@ -297,6 +297,24 @@
             margin-top: 1rem;
         }
 
+        .two-column-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .column-section {
+            display: flex;
+            flex-direction: column;
+        }
+
+        @media (max-width: 1200px) {
+            .two-column-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
         .detail-item {
             color: #cbd5e1;
         }
@@ -391,81 +409,101 @@
 
         <!-- Find Accommodation (Combined Tenant View + Smart Matching) -->
         <div id="tenant" class="tab-content">
-            <h2 style="margin-bottom: 1.5rem; color: #34d399;">Find Your Perfect Accommodation</h2>
+            <div class="two-column-grid">
+                <!-- Left Column: Smart Matching -->
+                <div class="column-section">
+                    <h2 style="margin-bottom: 1.5rem; color: #f9a8d4;">Find Your Perfect Accommodation</h2>
 
-            <!-- Smart Matching Section -->
-            <div class="filters" style="background: linear-gradient(135deg, rgba(236, 72, 153, 0.2), rgba(147, 51, 234, 0.15)); border-left: 4px solid #ec4899;">
-                <h3 style="color: #f9a8d4; margin-bottom: 1rem;">🎯 AI-Powered Smart Matching</h3>
-                <p style="color: #e0e7ff; margin-bottom: 1rem; font-size: 0.95rem;">Get personalized recommendations based on your preferences</p>
-                <div class="filter-group">
-                    <label>Budget (€):</label>
-                    <input type="number" id="matchBudget" placeholder="1000" value="1000">
+                    <!-- Smart Matching Section -->
+                    <div class="filters" style="background: linear-gradient(135deg, rgba(236, 72, 153, 0.2), rgba(147, 51, 234, 0.15)); border-left: 4px solid #ec4899;">
+                        <h3 style="color: #f9a8d4; margin-bottom: 1rem;">🎯 AI-Powered Smart Matching</h3>
+                        <p style="color: #e0e7ff; margin-bottom: 1rem; font-size: 0.95rem;">Get personalized recommendations based on your preferences</p>
+                        <div class="filter-group">
+                            <label>Budget (€):</label>
+                            <input type="number" id="matchBudget" placeholder="1000" value="1000">
 
-                    <label>Preferred District:</label>
-                    <select id="matchDistrict">
-                        <option value="Mitte">Mitte</option>
-                        <option value="Kreuzberg">Kreuzberg</option>
-                        <option value="Friedrichshain">Friedrichshain</option>
-                        <option value="Charlottenburg">Charlottenburg</option>
-                        <option value="Prenzlauer Berg">Prenzlauer Berg</option>
-                    </select>
+                            <label>Preferred District:</label>
+                            <select id="matchDistrict">
+                                <option value="Mitte">Mitte</option>
+                                <option value="Kreuzberg">Kreuzberg</option>
+                                <option value="Friedrichshain">Friedrichshain</option>
+                                <option value="Charlottenburg">Charlottenburg</option>
+                                <option value="Prenzlauer Berg">Prenzlauer Berg</option>
+                            </select>
 
-                    <label>Min Rating:</label>
-                    <input type="number" id="matchRating" min="1" max="5" step="0.1" value="4.0">
+                            <label>Min Rating:</label>
+                            <input type="number" id="matchRating" min="1" max="5" step="0.1" value="4.0">
 
-                    <button onclick="generateRecommendations()" style="padding: 0.75rem 2rem; background: linear-gradient(135deg, #ec4899, #db2777); color: white; border: none; border-radius: 8px; font-weight: bold; cursor: pointer; margin-top: 0.5rem;">Find Best Matches</button>
+                            <button onclick="generateRecommendations()" style="padding: 0.75rem 2rem; background: linear-gradient(135deg, #ec4899, #db2777); color: white; border: none; border-radius: 8px; font-weight: bold; cursor: pointer; margin-top: 0.5rem;">Find Best Matches</button>
+                        </div>
+                    </div>
+
+                    <h3 style="color: #f9a8d4; margin: 2rem 0 1rem 0;">Top Recommendations</h3>
+                    <div id="recommendationsContainer"></div>
                 </div>
-            </div>
 
-            <h3 style="color: #f9a8d4; margin: 2rem 0 1rem 0;">Top Recommendations</h3>
-            <div id="recommendationsContainer"></div>
+                <!-- Right Column: Browse All Listings -->
+                <div class="column-section">
+                    <h2 style="margin-bottom: 1.5rem; color: #60a5fa;">Browse All Listings</h2>
+                    <div class="filters" style="background: linear-gradient(135deg, rgba(59, 130, 246, 0.15), rgba(16, 185, 129, 0.15));">
+                        <h3 style="color: #60a5fa; margin-bottom: 1rem;">🔍 Filter Search</h3>
+                        <div class="filter-group">
+                            <label>District:</label>
+                            <select id="districtFilter">
+                                <option value="all">All Districts</option>
+                                <option value="Mitte">Mitte</option>
+                                <option value="Kreuzberg">Kreuzberg</option>
+                                <option value="Friedrichshain">Friedrichshain</option>
+                                <option value="Charlottenburg">Charlottenburg</option>
+                                <option value="Prenzlauer Berg">Prenzlauer Berg</option>
+                            </select>
 
-            <!-- Browse All Listings Section -->
-            <h2 style="margin: 3rem 0 1.5rem 0; color: #60a5fa;">Browse All Listings</h2>
-            <div class="filters" style="background: linear-gradient(135deg, rgba(59, 130, 246, 0.15), rgba(16, 185, 129, 0.15));">
-                <h3 style="color: #60a5fa; margin-bottom: 1rem;">🔍 Filter Search</h3>
-                <div class="filter-group">
-                    <label>District:</label>
-                    <select id="districtFilter">
-                        <option value="all">All Districts</option>
-                        <option value="Mitte">Mitte</option>
-                        <option value="Kreuzberg">Kreuzberg</option>
-                        <option value="Friedrichshain">Friedrichshain</option>
-                        <option value="Charlottenburg">Charlottenburg</option>
-                        <option value="Prenzlauer Berg">Prenzlauer Berg</option>
-                    </select>
+                            <label>Max Price (€):</label>
+                            <input type="number" id="priceFilter" placeholder="e.g., 1000" min="0">
 
-                    <label>Max Price (€):</label>
-                    <input type="number" id="priceFilter" placeholder="e.g., 1000" min="0">
+                            <label>Room Type:</label>
+                            <select id="roomTypeFilter">
+                                <option value="all">All Types</option>
+                                <option value="Private">Private Room</option>
+                                <option value="Entire">Entire Place</option>
+                                <option value="Shared">Shared Room</option>
+                            </select>
 
-                    <label>Room Type:</label>
-                    <select id="roomTypeFilter">
-                        <option value="all">All Types</option>
-                        <option value="Private">Private Room</option>
-                        <option value="Entire">Entire Place</option>
-                        <option value="Shared">Shared Room</option>
-                    </select>
+                            <label>Min Rating:</label>
+                            <input type="number" id="ratingFilter" placeholder="e.g., 4.0" min="1" max="5" step="0.1">
 
-                    <button onclick="populateTenantTable()" style="padding: 0.75rem 2rem; background: linear-gradient(135deg, #3b82f6, #2563eb); color: white; border: none; border-radius: 8px; font-weight: bold; cursor: pointer; margin-top: 0.5rem;">Search Listings</button>
+                            <label>Max Distance (km):</label>
+                            <input type="number" id="distanceFilter" placeholder="e.g., 5" min="0" step="0.1">
+
+                            <label>Verified Only:</label>
+                            <select id="verifiedFilter">
+                                <option value="all">All Properties</option>
+                                <option value="verified">Verified Only</option>
+                                <option value="unverified">Unverified Only</option>
+                            </select>
+
+                            <button onclick="populateTenantTable()" style="padding: 0.75rem 2rem; background: linear-gradient(135deg, #3b82f6, #2563eb); color: white; border: none; border-radius: 8px; font-weight: bold; cursor: pointer; margin-top: 0.5rem;">Search Listings</button>
+                        </div>
+                    </div>
+
+                    <div style="overflow-x: auto; margin-top: 1.5rem;">
+                        <table id="tenantTable">
+                            <thead>
+                                <tr>
+                                    <th>Property</th>
+                                    <th>District</th>
+                                    <th>Type</th>
+                                    <th>Price (€/month)</th>
+                                    <th>Rating</th>
+                                    <th>Distance to Center</th>
+                                    <th>Verified</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tenantTableBody">
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
-            </div>
-
-            <div style="overflow-x: auto; margin-top: 1.5rem;">
-                <table id="tenantTable">
-                    <thead>
-                        <tr>
-                            <th>Property</th>
-                            <th>District</th>
-                            <th>Type</th>
-                            <th>Price (€/month)</th>
-                            <th>Rating</th>
-                            <th>Distance to Center</th>
-                            <th>Verified</th>
-                        </tr>
-                    </thead>
-                    <tbody id="tenantTableBody">
-                    </tbody>
-                </table>
             </div>
         </div>
 
@@ -500,6 +538,22 @@
                 <div class="chart-container">
                     <h3 class="chart-title">Occupancy Trends</h3>
                     <canvas id="occupancyChart"></canvas>
+                </div>
+                <div class="chart-container">
+                    <h3 class="chart-title">Average Price by Room Type</h3>
+                    <canvas id="priceByRoomTypeChart"></canvas>
+                </div>
+                <div class="chart-container">
+                    <h3 class="chart-title">Guest Ratings Distribution</h3>
+                    <canvas id="ratingsDistributionChart"></canvas>
+                </div>
+                <div class="chart-container">
+                    <h3 class="chart-title">Booking Response Time</h3>
+                    <canvas id="responseTimeChart"></canvas>
+                </div>
+                <div class="chart-container">
+                    <h3 class="chart-title">Seasonal Revenue Forecast</h3>
+                    <canvas id="revenueForecastChart"></canvas>
                 </div>
             </div>
         </div>
@@ -614,7 +668,11 @@
                 labels: ['Entire Place', 'Private Room', 'Shared Room'],
                 datasets: [{
                     data: [1200, 950, 169],
-                    backgroundColor: [chartColors.primary, chartColors.secondary, chartColors.tertiary],
+                    backgroundColor: [
+                        '#3b82f6',  // Blue for Entire Place
+                        '#10b981',  // Green for Private Room
+                        '#f59e0b'   // Orange for Shared Room
+                    ],
                     borderWidth: 2,
                     borderColor: '#0f172a'
                 }]
@@ -753,6 +811,160 @@
             }
         });
 
+        // Average Price by Room Type Chart
+        const priceByRoomTypeCtx = document.getElementById('priceByRoomTypeChart').getContext('2d');
+        new Chart(priceByRoomTypeCtx, {
+            type: 'bar',
+            data: {
+                labels: ['Entire Place', 'Private Room', 'Shared Room'],
+                datasets: [{
+                    label: 'Average Price (€/month)',
+                    data: [1350, 850, 550],
+                    backgroundColor: [
+                        'rgba(59, 130, 246, 0.7)',   // Blue
+                        'rgba(16, 185, 129, 0.7)',   // Green
+                        'rgba(245, 158, 11, 0.7)'    // Orange
+                    ],
+                    borderColor: [
+                        '#3b82f6',
+                        '#10b981',
+                        '#f59e0b'
+                    ],
+                    borderWidth: 2
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: true,
+                plugins: {
+                    legend: { labels: { color: '#f1f5f9' } }
+                },
+                scales: {
+                    y: {
+                        ticks: { color: '#f1f5f9' },
+                        grid: { color: 'rgba(255, 255, 255, 0.1)' },
+                        beginAtZero: true
+                    },
+                    x: { ticks: { color: '#f1f5f9' }, grid: { color: 'rgba(255, 255, 255, 0.1)' } }
+                }
+            }
+        });
+
+        // Guest Ratings Distribution Chart
+        const ratingsDistributionCtx = document.getElementById('ratingsDistributionChart').getContext('2d');
+        new Chart(ratingsDistributionCtx, {
+            type: 'doughnut',
+            data: {
+                labels: ['5 Stars', '4-4.9 Stars', '3-3.9 Stars', 'Below 3'],
+                datasets: [{
+                    data: [245, 512, 198, 45],
+                    backgroundColor: [
+                        'rgba(16, 185, 129, 0.8)',   // Green
+                        'rgba(59, 130, 246, 0.8)',   // Blue
+                        'rgba(245, 158, 11, 0.8)',   // Orange
+                        'rgba(239, 68, 68, 0.8)'     // Red
+                    ],
+                    borderColor: '#0f172a',
+                    borderWidth: 2
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: true,
+                plugins: {
+                    legend: {
+                        position: 'bottom',
+                        labels: { color: '#f1f5f9', padding: 15 }
+                    }
+                }
+            }
+        });
+
+        // Booking Response Time Chart
+        const responseTimeCtx = document.getElementById('responseTimeChart').getContext('2d');
+        new Chart(responseTimeCtx, {
+            type: 'line',
+            data: {
+                labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+                datasets: [{
+                    label: 'Avg Response Time (hours)',
+                    data: [3.2, 2.8, 4.1, 3.5, 2.9, 5.2, 4.8],
+                    borderColor: '#ec4899',
+                    backgroundColor: 'rgba(236, 72, 153, 0.2)',
+                    fill: true,
+                    tension: 0.4,
+                    pointRadius: 5,
+                    pointBackgroundColor: '#ec4899'
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: true,
+                plugins: {
+                    legend: { labels: { color: '#f1f5f9' } }
+                },
+                scales: {
+                    y: {
+                        ticks: { color: '#f1f5f9' },
+                        grid: { color: 'rgba(255, 255, 255, 0.1)' },
+                        beginAtZero: true
+                    },
+                    x: { ticks: { color: '#f1f5f9' }, grid: { color: 'rgba(255, 255, 255, 0.1)' } }
+                }
+            }
+        });
+
+        // Seasonal Revenue Forecast Chart
+        const revenueForecastCtx = document.getElementById('revenueForecastChart').getContext('2d');
+        new Chart(revenueForecastCtx, {
+            type: 'line',
+            data: {
+                labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+                datasets: [
+                    {
+                        label: 'Actual Revenue (€)',
+                        data: [28500, 27800, 32000, 35200, 38500, 42000, 45000, 43500, 39000, 36500, 33000, 30000],
+                        borderColor: '#10b981',
+                        backgroundColor: 'rgba(16, 185, 129, 0.1)',
+                        fill: true,
+                        tension: 0.4
+                    },
+                    {
+                        label: 'Forecast Revenue (€)',
+                        data: [null, null, null, null, null, null, null, null, 39500, 37000, 34000, 31500],
+                        borderColor: '#fbbf24',
+                        backgroundColor: 'rgba(251, 191, 36, 0.1)',
+                        borderDash: [5, 5],
+                        fill: true,
+                        tension: 0.4
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: true,
+                plugins: {
+                    legend: {
+                        labels: { color: '#f1f5f9' },
+                        position: 'top'
+                    }
+                },
+                scales: {
+                    y: {
+                        ticks: {
+                            color: '#f1f5f9',
+                            callback: function(value) {
+                                return '€' + (value / 1000) + 'k';
+                            }
+                        },
+                        grid: { color: 'rgba(255, 255, 255, 0.1)' },
+                        beginAtZero: true
+                    },
+                    x: { ticks: { color: '#f1f5f9' }, grid: { color: 'rgba(255, 255, 255, 0.1)' } }
+                }
+            }
+        });
+
         // Populate Tenant Table
         function populateTenantTable() {
             const tbody = document.getElementById('tenantTableBody');
@@ -762,14 +974,22 @@
             const districtFilter = document.getElementById('districtFilter').value;
             const priceFilter = parseFloat(document.getElementById('priceFilter').value) || Infinity;
             const roomTypeFilter = document.getElementById('roomTypeFilter').value;
+            const ratingFilter = parseFloat(document.getElementById('ratingFilter').value) || 0;
+            const distanceFilter = parseFloat(document.getElementById('distanceFilter').value) || Infinity;
+            const verifiedFilter = document.getElementById('verifiedFilter').value;
 
             // Filter listings
             const filteredListings = sampleListings.filter(listing => {
                 const matchesDistrict = districtFilter === 'all' || listing.district === districtFilter;
                 const matchesPrice = listing.price <= priceFilter;
                 const matchesRoomType = roomTypeFilter === 'all' || listing.type === roomTypeFilter;
+                const matchesRating = listing.rating >= ratingFilter;
+                const matchesDistance = listing.distance <= distanceFilter;
+                const matchesVerified = verifiedFilter === 'all' ||
+                                       (verifiedFilter === 'verified' && listing.verified) ||
+                                       (verifiedFilter === 'unverified' && !listing.verified);
 
-                return matchesDistrict && matchesPrice && matchesRoomType;
+                return matchesDistrict && matchesPrice && matchesRoomType && matchesRating && matchesDistance && matchesVerified;
             });
 
             // Display filtered results
@@ -848,6 +1068,9 @@
         document.getElementById('districtFilter').addEventListener('change', populateTenantTable);
         document.getElementById('priceFilter').addEventListener('input', populateTenantTable);
         document.getElementById('roomTypeFilter').addEventListener('change', populateTenantTable);
+        document.getElementById('ratingFilter').addEventListener('input', populateTenantTable);
+        document.getElementById('distanceFilter').addEventListener('input', populateTenantTable);
+        document.getElementById('verifiedFilter').addEventListener('change', populateTenantTable);
 
         // Attach event listeners to matching filters
         document.getElementById('matchBudget').addEventListener('input', generateRecommendations);

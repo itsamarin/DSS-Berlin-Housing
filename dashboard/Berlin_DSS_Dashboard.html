@@ -2,7 +2,9 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <title>Berlin Housing DSS - Interactive Dashboard</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
     <style>
@@ -10,14 +12,18 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background: linear-gradient(135deg, #1e3a8a 0%, #312e81 50%, #4c1d95 100%);
+            background-attachment: fixed;
             color: #f1f5f9;
             min-height: 100vh;
             padding: 20px;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
         }
 
         .container {
@@ -37,6 +43,8 @@
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
+            -webkit-box-decoration-break: clone;
+            box-decoration-break: clone;
             margin-bottom: 0.5rem;
             font-weight: 800;
         }
@@ -62,6 +70,10 @@
             cursor: pointer;
             transition: all 0.3s ease;
             font-weight: 600;
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+            user-select: none;
+            touch-action: manipulation;
         }
 
         .tab:nth-child(1):hover {
@@ -325,6 +337,12 @@
 
         button {
             transition: all 0.3s ease;
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+            user-select: none;
+            touch-action: manipulation;
+            -webkit-appearance: none;
+            appearance: none;
         }
 
         button:hover {
@@ -335,6 +353,12 @@
 
         button:active {
             transform: translateY(0);
+        }
+
+        /* iOS-specific fixes for inputs */
+        input, select {
+            -webkit-appearance: none;
+            appearance: none;
         }
 
         @media (max-width: 768px) {
@@ -361,9 +385,9 @@
         </header>
 
         <div class="tabs">
-            <div class="tab active" onclick="switchTab('overview')">Overview Dashboard</div>
-            <div class="tab" onclick="switchTab('tenant')">Tenant View</div>
-            <div class="tab" onclick="switchTab('landlord')">Landlord Analytics</div>
+            <div class="tab active" onclick="switchTab('overview', event)">Overview Dashboard</div>
+            <div class="tab" onclick="switchTab('tenant', event)">Tenant View</div>
+            <div class="tab" onclick="switchTab('landlord', event)">Landlord Analytics</div>
         </div>
 
         <!-- Overview Dashboard -->
@@ -561,7 +585,10 @@
     </div>
 
     <script>
-        // Generate 1000 sample listings programmatically
+        // Lazy loading for sample listings - generate in batches
+        let sampleListings = [];
+        let isDataLoaded = false;
+
         function generateListings() {
             const districts = ["Mitte", "Kreuzberg", "Friedrichshain", "Charlottenburg", "Prenzlauer Berg"];
             const types = ["Entire", "Private", "Shared"];
@@ -573,7 +600,8 @@
 
             const listings = [];
 
-            for (let i = 1; i <= 1000; i++) {
+            // Reduced initial dataset from 1000 to 500 for faster loading
+            for (let i = 1; i <= 500; i++) {
                 const district = districts[Math.floor(Math.random() * districts.length)];
                 const type = types[Math.floor(Math.random() * types.length)];
                 const adjective = adjectives[Math.floor(Math.random() * adjectives.length)];
@@ -607,10 +635,34 @@
             return listings;
         }
 
-        const sampleListings = generateListings();
+        // Load data asynchronously to not block page render
+        function loadData() {
+            if (!isDataLoaded) {
+                setTimeout(() => {
+                    sampleListings = generateListings();
+                    isDataLoaded = true;
+                }, 100);
+            }
+        }
+
+        // Debounce utility function to prevent excessive filter calls
+        function debounce(func, wait) {
+            let timeout;
+            return function executedFunction(...args) {
+                const later = () => {
+                    clearTimeout(timeout);
+                    func(...args);
+                };
+                clearTimeout(timeout);
+                timeout = setTimeout(later, wait);
+            };
+        }
+
+        // Track which tabs have been initialized
+        let initializedTabs = { overview: false, tenant: false, landlord: false };
 
         // Tab Switching
-        function switchTab(tabName) {
+        function switchTab(tabName, event) {
             document.querySelectorAll('.tab-content').forEach(content => {
                 content.classList.remove('active');
             });
@@ -618,10 +670,21 @@
                 tab.classList.remove('active');
             });
             document.getElementById(tabName).classList.add('active');
-            event.target.classList.add('active');
+            if (event && event.target) {
+                event.target.classList.add('active');
+            }
 
-            if (tabName === 'matching') {
+            // Lazy load tab content
+            if (tabName === 'tenant' && !initializedTabs.tenant) {
+                populateTenantTable();
                 generateRecommendations();
+                initializedTabs.tenant = true;
+            } else if (tabName === 'landlord' && !initializedTabs.landlord) {
+                initializeLandlordCharts();
+                initializedTabs.landlord = true;
+            } else if (tabName === 'overview' && !initializedTabs.overview) {
+                initializeOverviewCharts();
+                initializedTabs.overview = true;
             }
         }
 
@@ -633,9 +696,11 @@
             background: 'rgba(245, 158, 11, 0.2)'
         };
 
-        // District Chart
-        const districtCtx = document.getElementById('districtChart').getContext('2d');
-        new Chart(districtCtx, {
+        // Initialize Overview Charts (lazy loaded)
+        function initializeOverviewCharts() {
+            // District Chart
+            const districtCtx = document.getElementById('districtChart').getContext('2d');
+            new Chart(districtCtx, {
             type: 'bar',
             data: {
                 labels: ['Mitte', 'Kreuzberg', 'Friedrichshain', 'Charlottenburg', 'Prenzlauer Berg', 'Neukölln'],
@@ -752,9 +817,12 @@
                 }
             }
         });
+        }
 
-        // Revenue Chart
-        const revenueCtx = document.getElementById('revenueChart').getContext('2d');
+        // Initialize Landlord Charts (lazy loaded)
+        function initializeLandlordCharts() {
+            // Revenue Chart
+            const revenueCtx = document.getElementById('revenueChart').getContext('2d');
         new Chart(revenueCtx, {
             type: 'bar',
             data: {
@@ -964,9 +1032,20 @@
                 }
             }
         });
+        }
 
-        // Populate Tenant Table
+        // Pagination state
+        let currentPage = 1;
+        const itemsPerPage = 50;
+
+        // Populate Tenant Table with pagination
         function populateTenantTable() {
+            if (!isDataLoaded) {
+                loadData();
+                setTimeout(populateTenantTable, 200);
+                return;
+            }
+
             const tbody = document.getElementById('tenantTableBody');
             tbody.innerHTML = '';
 
@@ -992,8 +1071,14 @@
                 return matchesDistrict && matchesPrice && matchesRoomType && matchesRating && matchesDistance && matchesVerified;
             });
 
+            // Pagination
+            const totalPages = Math.ceil(filteredListings.length / itemsPerPage);
+            const startIndex = (currentPage - 1) * itemsPerPage;
+            const endIndex = startIndex + itemsPerPage;
+            const paginatedListings = filteredListings.slice(startIndex, endIndex);
+
             // Display filtered results
-            filteredListings.forEach(listing => {
+            paginatedListings.forEach(listing => {
                 const row = `
                     <tr>
                         <td>${listing.name}</td>
@@ -1012,10 +1097,55 @@
             if (filteredListings.length === 0) {
                 tbody.innerHTML = '<tr><td colspan="7" style="text-align: center; padding: 2rem; color: #cbd5e1;">No accommodations match your filters. Try adjusting your criteria.</td></tr>';
             }
+
+            // Update pagination controls
+            updatePaginationControls(filteredListings.length, totalPages);
+        }
+
+        // Update pagination controls
+        function updatePaginationControls(totalItems, totalPages) {
+            let paginationDiv = document.getElementById('paginationControls');
+            if (!paginationDiv) {
+                paginationDiv = document.createElement('div');
+                paginationDiv.id = 'paginationControls';
+                paginationDiv.style.cssText = 'margin-top: 1.5rem; text-align: center; display: flex; justify-content: center; align-items: center; gap: 1rem;';
+                document.getElementById('tenantTable').parentElement.appendChild(paginationDiv);
+            }
+
+            if (totalPages <= 1) {
+                paginationDiv.innerHTML = '';
+                return;
+            }
+
+            let html = `<div style="color: #cbd5e1;">Page ${currentPage} of ${totalPages} (${totalItems} results)</div>`;
+            html += '<div style="display: flex; gap: 0.5rem;">';
+
+            if (currentPage > 1) {
+                html += `<button onclick="changePage(${currentPage - 1})" style="padding: 0.5rem 1rem; background: linear-gradient(135deg, #3b82f6, #2563eb); color: white; border: none; border-radius: 8px; cursor: pointer;">Previous</button>`;
+            }
+
+            if (currentPage < totalPages) {
+                html += `<button onclick="changePage(${currentPage + 1})" style="padding: 0.5rem 1rem; background: linear-gradient(135deg, #3b82f6, #2563eb); color: white; border: none; border-radius: 8px; cursor: pointer;">Next</button>`;
+            }
+
+            html += '</div>';
+            paginationDiv.innerHTML = html;
+        }
+
+        // Change page
+        function changePage(page) {
+            currentPage = page;
+            populateTenantTable();
         }
 
         // Generate Recommendations
         function generateRecommendations() {
+            if (!isDataLoaded) {
+                loadData();
+                setTimeout(generateRecommendations, 200);
+                return;
+            }
+
             const budget = parseFloat(document.getElementById('matchBudget').value) || 1000;
             const district = document.getElementById('matchDistrict').value;
             const minRating = parseFloat(document.getElementById('matchRating').value) || 4.0;
@@ -1064,22 +1194,58 @@
             });
         }
 
-        // Attach event listeners to filters
-        document.getElementById('districtFilter').addEventListener('change', populateTenantTable);
-        document.getElementById('priceFilter').addEventListener('input', populateTenantTable);
-        document.getElementById('roomTypeFilter').addEventListener('change', populateTenantTable);
-        document.getElementById('ratingFilter').addEventListener('input', populateTenantTable);
-        document.getElementById('distanceFilter').addEventListener('input', populateTenantTable);
-        document.getElementById('verifiedFilter').addEventListener('change', populateTenantTable);
+        // Create debounced versions of filter functions
+        const debouncedPopulateTenantTable = debounce(populateTenantTable, 300);
+        const debouncedGenerateRecommendations = debounce(generateRecommendations, 300);
 
-        // Attach event listeners to matching filters
-        document.getElementById('matchBudget').addEventListener('input', generateRecommendations);
+        // Attach event listeners to filters with debouncing for input events
+        document.getElementById('districtFilter').addEventListener('change', () => {
+            currentPage = 1; // Reset to first page
+            populateTenantTable();
+        });
+        document.getElementById('priceFilter').addEventListener('input', () => {
+            currentPage = 1;
+            debouncedPopulateTenantTable();
+        });
+        document.getElementById('roomTypeFilter').addEventListener('change', () => {
+            currentPage = 1;
+            populateTenantTable();
+        });
+        document.getElementById('ratingFilter').addEventListener('input', () => {
+            currentPage = 1;
+            debouncedPopulateTenantTable();
+        });
+        document.getElementById('distanceFilter').addEventListener('input', () => {
+            currentPage = 1;
+            debouncedPopulateTenantTable();
+        });
+        document.getElementById('verifiedFilter').addEventListener('change', () => {
+            currentPage = 1;
+            populateTenantTable();
+        });
+
+        // Attach event listeners to matching filters with debouncing
+        document.getElementById('matchBudget').addEventListener('input', debouncedGenerateRecommendations);
         document.getElementById('matchDistrict').addEventListener('change', generateRecommendations);
-        document.getElementById('matchRating').addEventListener('input', generateRecommendations);
+        document.getElementById('matchRating').addEventListener('input', debouncedGenerateRecommendations);
 
-        // Initialize
-        populateTenantTable();
-        generateRecommendations();
+        // Initialize data loading and defer heavy operations
+        function initializePage() {
+            loadData();
+            // Initialize overview charts since it's the default active tab
+            setTimeout(() => {
+                initializeOverviewCharts();
+                initializedTabs.overview = true;
+            }, 200);
+        }
+
+        // Support both DOMContentLoaded and load events for better iOS compatibility
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', initializePage);
+        } else {
+            // DOM already loaded (common on iOS)
+            initializePage();
+        }
     </script>
 </body>
 </html>

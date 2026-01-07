@@ -592,15 +592,24 @@
             <!-- Landlord Tenant Matching Section -->
             <h2 style="margin: 3rem 0 1.5rem 0; color: #f59e0b;">Find Your Perfect Tenant & Browse All Applicants</h2>
 
+            <!-- Info box explaining the two approaches -->
+            <div style="background: linear-gradient(135deg, rgba(236, 72, 153, 0.15), rgba(59, 130, 246, 0.15)); padding: 1.5rem; border-radius: 15px; margin-bottom: 2rem; border-left: 4px solid #ec4899;">
+                <p style="color: #e0e7ff; margin: 0; font-size: 0.95rem;">
+                    <strong style="color: #fbbf24;">💡 Two Ways to Find Tenants:</strong><br>
+                    <span style="color: #fbbf24;">⚡ AI Smart Match (Left)</span> - Quick & intelligent. Enter property details, get instant top 5 ranked matches with compatibility scores.<br>
+                    <span style="color: #60a5fa;">🔍 Manual Browse (Right)</span> - Full control. Filter, sort, and compare all 300 tenants your way.
+                </p>
+            </div>
+
             <div class="two-column-grid">
                 <!-- Left Column: Smart Tenant Matching -->
                 <div class="column-section">
-                    <h3 style="margin-bottom: 1.5rem; color: #f9a8d4;">AI-Powered Tenant Matching</h3>
+                    <h3 style="margin-bottom: 1.5rem; color: #f9a8d4;">🤖 AI-Powered Smart Matching</h3>
 
                     <!-- Smart Matching Section -->
                     <div class="filters" style="background: linear-gradient(135deg, rgba(245, 158, 11, 0.2), rgba(251, 191, 36, 0.15)); border-left: 4px solid #f59e0b;">
-                        <h3 style="color: #fbbf24; margin-bottom: 1rem;">🎯 Find Ideal Tenants for Your Property</h3>
-                        <p style="color: #e0e7ff; margin-bottom: 1rem; font-size: 0.95rem;">Advanced AI algorithm analyzes tenant compatibility, financial stability, location preferences, and historical data to find your perfect match</p>
+                        <h3 style="color: #fbbf24; margin-bottom: 1rem;">⚡ Quick Match: Your Best Tenants</h3>
+                        <p style="color: #e0e7ff; margin-bottom: 1rem; font-size: 0.95rem;">Just enter your property details - AI instantly analyzes 6+ factors (budget fit, income stability, verification, location match, type preference) and ranks top 5 compatible tenants</p>
                         <div class="filter-group">
                             <label>Your Property District:</label>
                             <select id="landlordPropertyDistrict">
@@ -646,16 +655,22 @@
                         </div>
                     </div>
 
-                    <h3 style="color: #fbbf24; margin: 2rem 0 1rem 0;">Top Tenant Recommendations</h3>
+                    <div style="display: flex; align-items: center; gap: 1rem; margin: 2rem 0 1rem 0;">
+                        <h3 style="color: #fbbf24; margin: 0;">Top 5 AI Recommendations</h3>
+                        <span style="background: rgba(251, 191, 36, 0.2); color: #fbbf24; padding: 0.25rem 0.75rem; border-radius: 12px; font-size: 0.75rem; font-weight: 600;">SMART MATCH</span>
+                    </div>
                     <div id="tenantRecommendationsContainer"></div>
                 </div>
 
                 <!-- Right Column: Browse All Tenants -->
                 <div class="column-section">
-                    <h3 style="margin-bottom: 1.5rem; color: #60a5fa;">Browse All Tenant Applicants</h3>
+                    <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1.5rem;">
+                        <h3 style="margin: 0; color: #60a5fa;">Browse & Compare All Applicants</h3>
+                        <span style="background: rgba(59, 130, 246, 0.2); color: #60a5fa; padding: 0.25rem 0.75rem; border-radius: 12px; font-size: 0.75rem; font-weight: 600;">FULL DATABASE</span>
+                    </div>
                     <div class="filters" style="background: linear-gradient(135deg, rgba(59, 130, 246, 0.15), rgba(16, 185, 129, 0.15));">
-                        <h3 style="color: #60a5fa; margin-bottom: 1rem;">🔍 Advanced Filter Search</h3>
-                        <p style="color: #cbd5e1; margin-bottom: 1rem; font-size: 0.9rem;">Use advanced filters to find tenants matching your specific requirements</p>
+                        <h3 style="color: #60a5fa; margin-bottom: 1rem;">🔍 Manual Search & Sorting</h3>
+                        <p style="color: #cbd5e1; margin-bottom: 1rem; font-size: 0.9rem;">Browse full database with custom filters and sorting - great for exploring all options or finding specific criteria</p>
                         <div class="filter-group">
                             <label>Preferred District:</label>
                             <select id="tenantDistrictFilter">
@@ -714,19 +729,27 @@
                         </div>
                     </div>
 
-                    <div style="overflow-x: auto; margin-top: 1.5rem;">
-                        <table id="landlordTenantTable">
-                            <thead>
-                                <tr>
-                                    <th>Tenant Name</th>
-                                    <th>Preferred District</th>
-                                    <th>Budget (€/month)</th>
-                                    <th>Income (€/month)</th>
-                                    <th>Room Type</th>
-                                    <th>Occupation</th>
-                                    <th>Verified</th>
-                                </tr>
-                            </thead>
+                    <div style="margin-top: 1.5rem;">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; padding: 1rem; background: rgba(59, 130, 246, 0.1); border-radius: 8px;">
+                            <div>
+                                <strong style="color: #60a5fa;">All Tenant Applicants</strong>
+                                <p style="margin: 0.25rem 0 0 0; font-size: 0.85rem; color: #cbd5e1;">Compare side-by-side | Sort by any column | Filter by multiple criteria</p>
+                            </div>
+                            <span id="tenantCountBadge" style="background: rgba(59, 130, 246, 0.3); color: #60a5fa; padding: 0.5rem 1rem; border-radius: 8px; font-weight: 600;"></span>
+                        </div>
+                        <div style="overflow-x: auto;">
+                            <table id="landlordTenantTable">
+                                <thead>
+                                    <tr>
+                                        <th>Tenant Name</th>
+                                        <th>Preferred District</th>
+                                        <th>Budget (€/month)</th>
+                                        <th>Income (€/month)</th>
+                                        <th>Room Type</th>
+                                        <th>Occupation</th>
+                                        <th>Verified</th>
+                                    </tr>
+                                </thead>
                             <tbody id="landlordTenantTableBody">
                             </tbody>
                         </table>
@@ -1634,6 +1657,12 @@
             // Show message if no results
             if (filteredTenants.length === 0) {
                 tbody.innerHTML = '<tr><td colspan="7" style="text-align: center; padding: 2rem; color: #cbd5e1;">No tenants match your filters. Try adjusting your criteria.</td></tr>';
+            }
+
+            // Update tenant count badge
+            const countBadge = document.getElementById('tenantCountBadge');
+            if (countBadge) {
+                countBadge.textContent = `${filteredTenants.length} ${filteredTenants.length === 1 ? 'Tenant' : 'Tenants'}`;
             }
 
             // Update pagination controls

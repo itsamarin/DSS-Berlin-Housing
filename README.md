@@ -9,7 +9,14 @@ An interactive web-based Decision Support System for analyzing Berlin's accommod
 ## Features
 
 - **Real-Time Analytics**: Interactive visualizations of 2,319+ accommodation listings (demo shows 1,000 sample listings)
-- **Smart Matching Algorithm**: AI-powered recommendations based on price (30%), location (20%), satisfaction (30%), and verification (20%)
+- **Advanced AI-Powered Smart Matching**:
+  - For Tenants: Find perfect accommodations based on budget, location, ratings, and preferences
+  - For Landlords: Find ideal tenants with advanced scoring considering budget match (20-40%), location (15-35%), income stability (10-20%), verification (10-35%), property type match (10-15%), and occupation preference (5%)
+  - Customizable priority modes: Balanced, Financial Stability, Location Match, or Verification Priority
+- **Advanced Filter Search**:
+  - Comprehensive filters for district, budget range, room type, occupation, and verification status
+  - Multiple sort options and pagination for efficient browsing
+  - Real-time filtering with instant results
 - **Multi-View Interface**: Overview Dashboard, Tenant View, and Landlord Analytics
 - **No Installation Required**: Pure HTML5/CSS3/JavaScript with Chart.js 4.4.0
 
@@ -50,7 +57,9 @@ DSS-Berlin-Housing/
 ├── dashboard/                         # Interactive web dashboard
 │   ├── Berlin_DSS_Dashboard.html     # Main dashboard file
 │   ├── README.md                      # Dashboard documentation
-│   └── DASHBOARD_COMPONENTS.md       # Detailed component descriptions
+│   ├── DASHBOARD_COMPONENTS.md       # Detailed component descriptions
+│   ├── LANDLORD_ANALYTICS_FEATURES.md # AI-Powered matching & filter docs
+│   └── IMPLEMENTATION_SUMMARY.md     # Summary of recent enhancements
 │
 ├── docs/                              # Project documentation
 │   └── README.md                      # Documentation index
@@ -84,12 +93,14 @@ DSS-Berlin-Housing/
 - **[data/README.md](data/original/README.md)** - Dataset documentation
 - **[models/README.md](models/README.md)** - Analytical models documentation
 - **[dashboard/README.md](dashboard/README.md)** - Dashboard customization guide
+- **[dashboard/LANDLORD_ANALYTICS_FEATURES.md](dashboard/LANDLORD_ANALYTICS_FEATURES.md)** - AI-Powered matching & advanced filters
+- **[dashboard/IMPLEMENTATION_SUMMARY.md](dashboard/IMPLEMENTATION_SUMMARY.md)** - Recent enhancements summary
 
 ## Use Cases
 
 **For Tenants**: Find accommodations matching budget and preferences, compare districts and ratings, get AI recommendations
 
-**For Landlords**: Analyze market trends, optimize pricing strategies, track occupancy rates, identify high-performing properties
+**For Landlords**: Find ideal tenants with AI-powered matching, analyze market trends, optimize pricing strategies, track occupancy rates, browse tenant applicants with advanced filters, identify high-performing properties
 
 **For Researchers**: Study housing market dynamics, analyze pricing correlations, explore geographic patterns
 

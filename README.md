@@ -32,11 +32,29 @@ An interactive web-based Decision Support System for analyzing Berlin's accommod
 # Clone repository
 git clone https://github.com/itsamarin/DSS-Berlin-Housing.git
 cd DSS-Berlin-Housing
+```
 
-# Open dashboard
+#### To run the dashboard (HTML):
+
+```bash
+# macOS/Linux:
 open dashboard/Berlin_DSS_Dashboard.html
+# Windows:
+start dashboard/Berlin_DSS_Dashboard.html
+```
 
-# Or use local server
+#### To run the backend data pipeline (main.py):
+
+```bash
+# macOS/Linux:
+python3 main.py
+# Windows:
+python main.py
+```
+
+#### Or use a local server for the dashboard:
+
+```bash
 python -m http.server 8000
 # Visit: http://localhost:8000/dashboard/Berlin_DSS_Dashboard.html
 ```
@@ -45,34 +63,40 @@ python -m http.server 8000
 
 ```
 DSS-Berlin-Housing/
-├── data/                              # Data files
-│   ├── original/                      # Raw, unprocessed datasets
-│   │   └── README.md                  # Original data documentation
-│   └── cleaned/                       # Processed, cleaned datasets
-│       └── README.md                  # Cleaned data documentation
+├── data/
+│   ├── original/           # Raw, unprocessed datasets
+│   └── cleaned/            # Processed, cleaned datasets
 │
-├── models/                            # Data models and analytical models
-│   └── README.md                      # Models documentation
+├── models/                 # Data models and analytical models
 │
-├── dashboard/                         # Interactive web dashboard
+├── dashboard/              # Interactive web dashboard
 │   ├── Berlin_DSS_Dashboard.html     # Main dashboard file
 │   ├── README.md                      # Dashboard documentation
 │   ├── DASHBOARD_COMPONENTS.md       # Detailed component descriptions
 │   ├── LANDLORD_ANALYTICS_FEATURES.md # AI-Powered matching & filter docs
 │   └── IMPLEMENTATION_SUMMARY.md     # Summary of recent enhancements
 │
-├── docs/                              # Project documentation
-│   └── README.md                      # Documentation index
+├── docs/                   # Project documentation
 │
-├── index.html                         # Landing page
-├── README.md                          # This file
-├── LICENSE                            # MIT License
-├── CONTRIBUTING.md                    # Contribution guidelines
-├── DEPLOYMENT_GUIDE.md                # Deployment instructions
-├── QUICK_START.md                     # Quick start guide
-├── setup.sh                           # Setup script for Unix/Linux/macOS
-├── setup.bat                          # Setup script for Windows
-└── .gitignore                         # Git ignore configuration
+├── src/                    # Python source code
+│   ├── extraction/         # Data extraction scripts
+│   │   └── data_extraction.py
+│   ├── cleaning/           # Data cleaning scripts
+│   │   └── data_cleaning.py
+│   ├── feature_engineering/# Feature engineering scripts
+│   │   └── feature_engineering.py
+│   └── visualisation/      # Visualization scripts
+│       └── basic_visualisation.py
+│
+├── index.html              # Landing page
+├── README.md               # This file
+├── LICENSE                 # MIT License
+├── CONTRIBUTING.md         # Contribution guidelines
+├── DEPLOYMENT_GUIDE.md     # Deployment instructions
+├── QUICK_START.md          # Quick start guide
+├── setup.sh                # Setup script for Unix/Linux/macOS
+├── setup.bat               # Setup script for Windows
+└── .gitignore              # Git ignore configuration
 ```
 
 ## Data Overview

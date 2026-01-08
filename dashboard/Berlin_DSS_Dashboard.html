@@ -393,7 +393,7 @@
         <div class="tabs">
             <div class="tab active" onclick="switchTab('overview', event)">Overview Dashboard</div>
             <div class="tab" onclick="switchTab('tenant', event)">Tenant View</div>
-            <div class="tab" onclick="switchTab('landlord', event)">Landlord Analytics</div>
+            <div class="tab" onclick="switchTab('landlord', event)">Landlord View</div>
         </div>
 
         <!-- Overview Dashboard -->
@@ -433,6 +433,54 @@
                 <div class="chart-container">
                     <h3 class="chart-title">Monthly Booking Trends</h3>
                     <canvas id="bookingTrendsChart"></canvas>
+                </div>
+            </div>
+
+            <h2 style="margin: 3rem 0 1.5rem 0; color: #f59e0b;">Landlord Performance Analytics</h2>
+
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <span class="stat-number">€1,245</span>
+                    <span class="stat-label">Avg. Monthly Revenue</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-number">78%</span>
+                    <span class="stat-label">Occupancy Rate</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-number">4.3/5</span>
+                    <span class="stat-label">Avg. Guest Rating</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-number">12.5</span>
+                    <span class="stat-label">Avg. Days to Book</span>
+                </div>
+            </div>
+
+            <div class="charts-grid">
+                <div class="chart-container">
+                    <h3 class="chart-title">Revenue by District</h3>
+                    <canvas id="revenueChart"></canvas>
+                </div>
+                <div class="chart-container">
+                    <h3 class="chart-title">Occupancy Trends</h3>
+                    <canvas id="occupancyChart"></canvas>
+                </div>
+                <div class="chart-container">
+                    <h3 class="chart-title">Average Price by Room Type</h3>
+                    <canvas id="priceByRoomTypeChart"></canvas>
+                </div>
+                <div class="chart-container">
+                    <h3 class="chart-title">Guest Ratings Distribution</h3>
+                    <canvas id="ratingsDistributionChart"></canvas>
+                </div>
+                <div class="chart-container">
+                    <h3 class="chart-title">Booking Response Time</h3>
+                    <canvas id="responseTimeChart"></canvas>
+                </div>
+                <div class="chart-container">
+                    <h3 class="chart-title">Seasonal Revenue Forecast</h3>
+                    <canvas id="revenueForecastChart"></canvas>
                 </div>
             </div>
         </div>
@@ -539,58 +587,10 @@
             </div>
         </div>
 
-        <!-- Landlord Analytics -->
+        <!-- Landlord View -->
         <div id="landlord" class="tab-content">
-            <h2 style="margin-bottom: 1.5rem; color: #f59e0b;">Landlord Performance Analytics</h2>
-
-            <div class="stats-grid">
-                <div class="stat-card">
-                    <span class="stat-number">€1,245</span>
-                    <span class="stat-label">Avg. Monthly Revenue</span>
-                </div>
-                <div class="stat-card">
-                    <span class="stat-number">78%</span>
-                    <span class="stat-label">Occupancy Rate</span>
-                </div>
-                <div class="stat-card">
-                    <span class="stat-number">4.3/5</span>
-                    <span class="stat-label">Avg. Guest Rating</span>
-                </div>
-                <div class="stat-card">
-                    <span class="stat-number">12.5</span>
-                    <span class="stat-label">Avg. Days to Book</span>
-                </div>
-            </div>
-
-            <div class="charts-grid">
-                <div class="chart-container">
-                    <h3 class="chart-title">Revenue by District</h3>
-                    <canvas id="revenueChart"></canvas>
-                </div>
-                <div class="chart-container">
-                    <h3 class="chart-title">Occupancy Trends</h3>
-                    <canvas id="occupancyChart"></canvas>
-                </div>
-                <div class="chart-container">
-                    <h3 class="chart-title">Average Price by Room Type</h3>
-                    <canvas id="priceByRoomTypeChart"></canvas>
-                </div>
-                <div class="chart-container">
-                    <h3 class="chart-title">Guest Ratings Distribution</h3>
-                    <canvas id="ratingsDistributionChart"></canvas>
-                </div>
-                <div class="chart-container">
-                    <h3 class="chart-title">Booking Response Time</h3>
-                    <canvas id="responseTimeChart"></canvas>
-                </div>
-                <div class="chart-container">
-                    <h3 class="chart-title">Seasonal Revenue Forecast</h3>
-                    <canvas id="revenueForecastChart"></canvas>
-                </div>
-            </div>
-
             <!-- Landlord Tenant Matching Section -->
-            <h2 style="margin: 3rem 0 1.5rem 0; color: #f59e0b;">Find Your Perfect Tenant & Browse All Applicants</h2>
+            <h2 style="margin-bottom: 1.5rem; color: #f59e0b;">Find Your Perfect Tenant & Browse All Applicants</h2>
 
             <!-- Info box explaining the two approaches -->
             <div style="background: linear-gradient(135deg, rgba(236, 72, 153, 0.15), rgba(59, 130, 246, 0.15)); padding: 1.5rem; border-radius: 15px; margin-bottom: 2rem; border-left: 4px solid #ec4899;">

@@ -33,10 +33,10 @@ Three main navigation tabs with distinct color schemes:
 - **Purpose**: Helps tenants find and match with accommodations
 - **Icon/Label**: "Tenant View"
 
-### 3. Landlord Analytics (Orange)
+### 3. Landlord View (Orange)
 - **Color**: Orange gradient (#f59e0b to #d97706)
-- **Purpose**: Provides landlord performance metrics and forecasting
-- **Icon/Label**: "Landlord Analytics"
+- **Purpose**: Helps landlords find ideal tenants with AI-powered matching and filtering
+- **Icon/Label**: "Landlord View"
 
 ---
 
@@ -103,6 +103,97 @@ Three main navigation tabs with distinct color schemes:
 - **Color**: Blue gradient fill
 - **Purpose**: Show seasonal booking patterns
 - **Insights**: Helps predict demand fluctuations
+
+### Landlord Performance Analytics Section
+
+This section provides detailed landlord-specific metrics and forecasting within the Overview Dashboard.
+
+#### Stat Cards (4 Metrics)
+
+##### Card 1: Avg. Monthly Revenue
+- **Value**: €1,245
+- **Purpose**: Shows average income per property per month
+- **Color**: Blue gradient
+
+##### Card 2: Occupancy Rate
+- **Value**: 78%
+- **Purpose**: Percentage of time properties are booked
+- **Color**: Green gradient
+
+##### Card 3: Avg. Guest Rating
+- **Value**: 4.3/5
+- **Purpose**: Average satisfaction score from guests
+- **Color**: Orange gradient
+
+##### Card 4: Avg. Days to Book
+- **Value**: 12.5
+- **Purpose**: Average time from listing to first booking
+- **Color**: Red gradient
+
+#### Charts (6 Visualizations)
+
+##### Chart 1: Revenue by District (Bar Chart)
+- **Type**: Vertical Bar Chart
+- **Data**: Average monthly revenue per district
+- **Districts**: Mitte (€1,450), Kreuzberg (€1,200), Friedrichshain (€1,100), Charlottenburg (€1,350), Prenzlauer Berg (€1,250)
+- **Color**: Primary gradient
+- **Purpose**: Compare revenue performance across locations
+- **Y-axis**: Revenue in euros
+- **Insights**: Identifies most profitable districts
+
+##### Chart 2: Occupancy Trends (Line Chart)
+- **Type**: Line Chart with area fill
+- **X-axis**: Weeks (Week 1-4)
+- **Y-axis**: Occupancy Rate (0-100%)
+- **Data**: Weekly occupancy percentages (72%, 78%, 82%, 76%)
+- **Color**: Primary gradient with fill
+- **Purpose**: Track booking rate over time
+- **Insights**: Shows weekly performance trends
+
+##### Chart 3: Average Price by Room Type (Bar Chart)
+- **Type**: Vertical Bar Chart
+- **Categories**:
+  - Entire Place: €1,350 (Blue)
+  - Private Room: €850 (Green)
+  - Shared Room: €550 (Orange)
+- **Color**: Multi-color (blue, green, orange)
+- **Purpose**: Compare pricing across accommodation types
+- **Insights**: Shows market rate differences
+
+##### Chart 4: Guest Ratings Distribution (Doughnut Chart)
+- **Type**: Doughnut Chart
+- **Categories**:
+  - 5 Stars: 245 properties (Green)
+  - 4-4.9 Stars: 512 properties (Blue)
+  - 3-3.9 Stars: 198 properties (Orange)
+  - Below 3: 45 properties (Red)
+- **Purpose**: Visualize quality distribution
+- **Position**: Legend at bottom
+- **Insights**: Shows overall portfolio quality
+
+##### Chart 5: Booking Response Time (Line Chart)
+- **Type**: Line Chart with points
+- **X-axis**: Days of week (Mon-Sun)
+- **Y-axis**: Response time in hours
+- **Data**: Average response times per day (3.2h, 2.8h, 4.1h, 3.5h, 2.9h, 5.2h, 4.8h)
+- **Color**: Pink (#ec4899)
+- **Purpose**: Track landlord responsiveness
+- **Insights**: Identifies slow response days
+
+##### Chart 6: Seasonal Revenue Forecast (Dual-Line Chart)
+- **Type**: Multi-line Chart
+- **X-axis**: Months (Jan-Dec)
+- **Y-axis**: Revenue (€ in thousands)
+- **Lines**:
+  1. **Actual Revenue** (Solid green line)
+     - Data: Jan-Aug actual performance
+     - Shows historical earnings
+  2. **Forecast Revenue** (Dashed yellow line)
+     - Data: Sep-Dec predictions
+     - Shows projected earnings
+- **Y-axis Format**: €30k, €35k, €40k, etc.
+- **Purpose**: Compare actual vs predicted revenue
+- **Insights**: Helps with financial planning
 
 ---
 
@@ -212,94 +303,9 @@ Two-column layout with Smart Matching (left) and Browse Listings (right).
 
 ---
 
-## Tab 3: Landlord Analytics
+## Tab 3: Landlord View
 
-### Stat Cards (4 Metrics)
-
-#### Card 1: Avg. Monthly Revenue
-- **Value**: €1,245
-- **Purpose**: Shows average income per property per month
-- **Color**: Blue gradient
-
-#### Card 2: Occupancy Rate
-- **Value**: 78%
-- **Purpose**: Percentage of time properties are booked
-- **Color**: Green gradient
-
-#### Card 3: Avg. Guest Rating
-- **Value**: 4.3/5
-- **Purpose**: Average satisfaction score from guests
-- **Color**: Orange gradient
-
-#### Card 4: Avg. Days to Book
-- **Value**: 12.5
-- **Purpose**: Average time from listing to first booking
-- **Color**: Red gradient
-
-### Charts (6 Visualizations)
-
-#### Chart 1: Revenue by District (Bar Chart)
-- **Type**: Vertical Bar Chart
-- **Data**: Average monthly revenue per district
-- **Districts**: Mitte (€1,450), Kreuzberg (€1,200), Friedrichshain (€1,100), Charlottenburg (€1,350), Prenzlauer Berg (€1,250)
-- **Color**: Primary gradient
-- **Purpose**: Compare revenue performance across locations
-- **Y-axis**: Revenue in euros
-- **Insights**: Identifies most profitable districts
-
-#### Chart 2: Occupancy Trends (Line Chart)
-- **Type**: Line Chart with area fill
-- **X-axis**: Weeks (Week 1-4)
-- **Y-axis**: Occupancy Rate (0-100%)
-- **Data**: Weekly occupancy percentages (72%, 78%, 82%, 76%)
-- **Color**: Primary gradient with fill
-- **Purpose**: Track booking rate over time
-- **Insights**: Shows weekly performance trends
-
-#### Chart 3: Average Price by Room Type (Bar Chart)
-- **Type**: Vertical Bar Chart
-- **Categories**:
-  - Entire Place: €1,350 (Blue)
-  - Private Room: €850 (Green)
-  - Shared Room: €550 (Orange)
-- **Color**: Multi-color (blue, green, orange)
-- **Purpose**: Compare pricing across accommodation types
-- **Insights**: Shows market rate differences
-
-#### Chart 4: Guest Ratings Distribution (Doughnut Chart)
-- **Type**: Doughnut Chart
-- **Categories**:
-  - 5 Stars: 245 properties (Green)
-  - 4-4.9 Stars: 512 properties (Blue)
-  - 3-3.9 Stars: 198 properties (Orange)
-  - Below 3: 45 properties (Red)
-- **Purpose**: Visualize quality distribution
-- **Position**: Legend at bottom
-- **Insights**: Shows overall portfolio quality
-
-#### Chart 5: Booking Response Time (Line Chart)
-- **Type**: Line Chart with points
-- **X-axis**: Days of week (Mon-Sun)
-- **Y-axis**: Response time in hours
-- **Data**: Average response times per day (3.2h, 2.8h, 4.1h, 3.5h, 2.9h, 5.2h, 4.8h)
-- **Color**: Pink (#ec4899)
-- **Purpose**: Track landlord responsiveness
-- **Insights**: Identifies slow response days
-
-#### Chart 6: Seasonal Revenue Forecast (Dual-Line Chart)
-- **Type**: Multi-line Chart
-- **X-axis**: Months (Jan-Dec)
-- **Y-axis**: Revenue (€ in thousands)
-- **Lines**:
-  1. **Actual Revenue** (Solid green line)
-     - Data: Jan-Aug actual performance
-     - Shows historical earnings
-  2. **Forecast Revenue** (Dashed yellow line)
-     - Data: Sep-Dec predictions
-     - Shows projected earnings
-- **Y-axis Format**: €30k, €35k, €40k, etc.
-- **Purpose**: Compare actual vs predicted revenue
-- **Insights**: Helps with financial planning
+This tab focuses on helping landlords find ideal tenants through AI-powered matching and comprehensive filtering capabilities.
 
 ### Tenant Matching & Browse Section
 
@@ -654,6 +660,12 @@ Format: `[Adjective] [Property Type] [District]`
 
 ## Recent Updates
 
+### Version 1.2 (January 2026)
+- **Reorganized Dashboard Structure**:
+  - Renamed "Landlord Analytics" tab to "Landlord View"
+  - Moved Landlord Performance Analytics (4 stat cards + 6 charts) to Overview Dashboard
+  - Landlord View now focuses exclusively on tenant matching and browsing
+
 ### Version 1.1 (January 2026)
 - Added AI-Powered Smart Matching for landlord-tenant matching
 - Implemented advanced scoring algorithm with 6+ factors
@@ -668,11 +680,11 @@ Format: `[Adjective] [Property Type] [District]`
 - Initial dashboard release
 - Overview Dashboard with 4 charts
 - Tenant View with smart matching
-- Landlord Analytics with 6 charts
+- Landlord View with performance analytics
 - Responsive design implementation
 
 ---
 
 **Last Updated**: January 8, 2026
-**Version**: 1.1
+**Version**: 1.2
 **Dashboard File**: Berlin_DSS_Dashboard.html

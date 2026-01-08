@@ -301,6 +301,237 @@ Two-column layout with Smart Matching (left) and Browse Listings (right).
 - **Purpose**: Compare actual vs predicted revenue
 - **Insights**: Helps with financial planning
 
+### Tenant Matching & Browse Section
+
+Two-column layout with AI Smart Matching (left) and Manual Browse (right).
+
+#### Info Box: Two Ways to Find Tenants
+- **Background**: Pink-blue gradient
+- **Border**: Left border in pink (#ec4899)
+- **Content**:
+  - Title: "💡 Two Ways to Find Tenants"
+  - Left approach: "⚡ AI Smart Match" - Quick & intelligent recommendations
+  - Right approach: "🔍 Manual Browse" - Full control over all tenants
+- **Purpose**: Educates users about the two different search methods
+
+### Left Column: AI-Powered Smart Matching
+
+#### Section Header
+- **Title**: "🤖 AI-Powered Smart Matching"
+- **Badge**: "SMART MATCH" (gold with transparent background)
+- **Color**: Pink (#f9a8d4)
+- **Background**: Orange gradient
+
+#### Filter Panel: Quick Match
+- **Title**: "⚡ Quick Match: Your Best Tenants"
+- **Description**: "Just enter your property details - AI instantly analyzes 6+ factors (budget fit, income stability, verification, location match, type preference) and ranks top 5 compatible tenants"
+- **Background**: Orange-amber gradient with left gold border
+- **Layout**: Two-column grid (label | input)
+
+##### Input Fields:
+1. **Your Property District**
+   - Type: Dropdown select
+   - Options: Mitte, Kreuzberg, Friedrichshain, Charlottenburg, Prenzlauer Berg
+   - Purpose: Set property location for matching
+
+2. **Your Asking Price (€)**
+   - Type: Number input
+   - Default: 1200
+   - Purpose: Set monthly rent expectation
+
+3. **Property Type**
+   - Type: Dropdown select
+   - Options: Entire Place, Private Room, Shared Room
+   - Purpose: Specify accommodation type
+
+4. **Min Tenant Budget (€)**
+   - Type: Number input
+   - Default: 1000
+   - Purpose: Filter out tenants below budget threshold
+
+5. **Preferred Tenant Type**
+   - Type: Dropdown select
+   - Options: All Occupations, Professional, Student, Researcher, Engineer
+   - Purpose: Target specific tenant demographics
+
+6. **Priority Factors**
+   - Type: Dropdown select
+   - Options:
+     - Balanced (All Factors) - Default 30/20/15/15/15/5 weights
+     - Financial Stability - 40/15/10/10/20/5 weights
+     - Location Match - 25/35/15/10/10/5 weights
+     - Verification Priority - 20/15/15/35/10/5 weights
+   - Purpose: Customize AI weighting algorithm
+
+##### Action Button:
+- **Label**: "Find Best Tenant Matches"
+- **Color**: Orange gradient (#f59e0b to #d97706)
+- **Action**: Triggers AI matching algorithm
+
+#### Results Section: Top 5 AI Recommendations
+- **Title**: "Top 5 AI Recommendations"
+- **Badge**: "SMART MATCH" (gold with transparent background)
+- **Color**: Gold (#fbbf24)
+- **Display**: Maximum 5 ranked recommendation cards
+
+##### Recommendation Card Structure:
+- **Header**: Rank number + tenant name + match quality badge
+  - 🌟 Excellent Match (80-100 score)
+  - ✨ Good Match (65-79 score)
+  - ⭐ Fair Match (0-64 score)
+- **AI Match Score**: 0-100 score with breakdown
+- **Score Breakdown**: Shows contribution from each factor:
+  - Budget (20-40 points)
+  - Location (15-35 points)
+  - Type (10-15 points)
+  - Verification (10-35 points)
+  - Income (10-20 points)
+  - Occupation (5 points)
+  - Compatibility Bonus (up to 5 points)
+- **Details**:
+  - Occupation
+  - Budget with affordability ratio (Xx your price)
+  - Income with 3x rule indicator:
+    - ✓ Meets 3x rule (Green)
+    - ~ Close to 3x rule (Orange)
+    - ✗ Below 3x rule (Red)
+  - Preferred District
+  - Preferred Type
+  - Verification status (✓ Yes / ✗ No)
+- **Background**: Orange gradient with gold border
+- **Empty State**: Message when no matches found
+
+##### AI Scoring Algorithm:
+1. **Budget Match** (20-40%):
+   - Perfect: 1-1.3x property price = 100% of weight
+   - Overqualified: >1.3x = 85% of weight
+   - Below budget: Proportional reduction
+
+2. **Location Match** (15-35%):
+   - Exact district = 100% of weight
+   - Different district = 50% of weight
+
+3. **Property Type Match** (10-15%):
+   - Exact match = 100% of weight
+   - Different type = 40% of weight
+
+4. **Verification Status** (10-35%):
+   - Verified = 100% of weight
+   - Unverified = 30% of weight
+
+5. **Income Stability** (10-20%):
+   - Income ≥ 3x rent = 100% of weight (3x rule)
+   - Income ≥ 2.5x rent = 80% of weight
+   - Below 2.5x = 40% of weight
+
+6. **Occupation Match** (5%):
+   - Matches preference = 100% of weight
+   - Different occupation = 30% of weight
+   - "All" selected = 100% of weight
+
+7. **Compatibility Bonus** (up to 5%):
+   - Verified + Income ≥ 3x + Budget matches = 5 bonus points
+   - Score capped at 100 maximum
+
+### Right Column: Manual Browse & Compare
+
+#### Section Header
+- **Title**: "Browse & Compare All Applicants"
+- **Badge**: "FULL DATABASE" (blue with transparent background)
+- **Color**: Blue (#60a5fa)
+- **Background**: Blue-green gradient
+
+#### Filter Panel: Manual Search & Sorting
+- **Title**: "🔍 Manual Search & Sorting"
+- **Description**: "Browse full database with custom filters and sorting - great for exploring all options or finding specific criteria"
+- **Background**: Blue-green gradient
+- **Layout**: Two-column grid (label | input)
+
+##### Filter Fields:
+1. **Preferred District**
+   - Type: Dropdown
+   - Options: All Districts, Mitte, Kreuzberg, Friedrichshain, Charlottenburg, Prenzlauer Berg
+   - Purpose: Filter by tenant's preferred location
+
+2. **Min Budget (€)**
+   - Type: Number input
+   - Purpose: Set minimum tenant budget threshold
+
+3. **Max Budget (€)**
+   - Type: Number input
+   - Purpose: Set maximum tenant budget threshold
+
+4. **Room Type Preference**
+   - Type: Dropdown
+   - Options: All Types, Entire Place, Private Room, Shared Room
+   - Purpose: Filter by preferred accommodation type
+
+5. **Occupation**
+   - Type: Dropdown
+   - Options: All Occupations, Student, Professional, Researcher, Engineer, Designer, Teacher, Developer
+   - Purpose: Filter by tenant profession
+
+6. **Verified Tenants**
+   - Type: Dropdown
+   - Options: All Tenants, Verified Only, Unverified Only
+   - Purpose: Filter by verification status
+
+7. **Sort By**
+   - Type: Dropdown
+   - Options:
+     - Budget (High to Low) - Default
+     - Budget (Low to High)
+     - Verification Status
+     - Name (A-Z)
+   - Purpose: Control table ordering
+
+##### Action Buttons:
+- **Primary Button**:
+  - Label: "Search Tenants"
+  - Color: Blue gradient (#3b82f6 to #2563eb)
+  - Action: Applies all filters and sorting
+- **Secondary Button**:
+  - Label: "Reset Filters"
+  - Color: Gray gradient (#6b7280 to #4b5563)
+  - Action: Clears all filters, resets to default
+
+#### Results Section: All Tenant Applicants
+- **Header Box**:
+  - Title: "All Tenant Applicants"
+  - Subtitle: "Compare side-by-side | Sort by any column | Filter by multiple criteria"
+  - Live Count Badge: Shows filtered result count (e.g., "256 Tenants")
+  - Background: Light blue transparent
+  - Color: Blue (#60a5fa)
+
+##### Results Table: Tenant Listing
+- **Columns**:
+  1. **Tenant Name** - Full name
+  2. **Preferred District** - Desired location
+  3. **Budget (€/month)** - Monthly rental budget
+  4. **Income (€/month)** - Monthly income with ratio indicator
+     - Color-coded: Green (≥3x), Orange (2.5-3x), Red (<2.5x)
+     - Format: "€3,600 (3.0x)"
+  5. **Room Type** - Preferred accommodation type
+  6. **Occupation** - Professional background
+  7. **Verified** - Verification status
+     - ✓ Yes (Green) / ✗ No (Red)
+- **Features**:
+  - Horizontal scroll for overflow
+  - Pagination: 50 tenants per page
+  - Empty state message when no results
+  - Real-time filtering with debounce (300ms)
+  - Live tenant count updates
+
+##### Pagination Controls:
+- **Display**: Centered below table
+- **Elements**:
+  - Previous/Next buttons
+  - Page numbers with current page highlight
+  - Total items count
+- **Behavior**:
+  - Resets to page 1 on filter change
+  - Disabled buttons at boundaries
+
 ---
 
 ## Color Scheme
@@ -421,6 +652,27 @@ Format: `[Adjective] [Property Type] [District]`
 
 ---
 
-**Last Updated**: December 2025
-**Version**: 1.0
+## Recent Updates
+
+### Version 1.1 (January 2026)
+- Added AI-Powered Smart Matching for landlord-tenant matching
+- Implemented advanced scoring algorithm with 6+ factors
+- Added customizable priority modes (Balanced, Financial, Location, Verification)
+- Implemented Manual Browse & Compare with full database access
+- Added live tenant count badge and advanced filtering
+- Implemented income-to-rent ratio color coding (3x rule indicator)
+- Added two-column grid layout for filter inputs
+- Diversified AI Smart Match vs Manual Browse approaches
+
+### Version 1.0 (December 2025)
+- Initial dashboard release
+- Overview Dashboard with 4 charts
+- Tenant View with smart matching
+- Landlord Analytics with 6 charts
+- Responsive design implementation
+
+---
+
+**Last Updated**: January 8, 2026
+**Version**: 1.1
 **Dashboard File**: Berlin_DSS_Dashboard.html

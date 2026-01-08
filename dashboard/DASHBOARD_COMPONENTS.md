@@ -201,6 +201,15 @@ This section provides detailed landlord-specific metrics and forecasting within 
 
 Two-column layout with Smart Matching (left) and Browse Listings (right).
 
+#### Info Box: Two Ways to Find Accommodations
+- **Background**: Pink-purple gradient
+- **Border**: Left border in pink (#ec4899)
+- **Content**:
+  - Title: "💡 Two Ways to Find Accommodations"
+  - Left approach: "🎯 AI Smart Match" - Quick & intelligent recommendations with match scores
+  - Right approach: "🔍 Manual Browse" - Full control to explore all 1,000+ listings
+- **Purpose**: Educates tenants about the two different search methods
+
 ### Left Column: Smart Matching Section
 
 #### Section Header
@@ -660,11 +669,23 @@ Format: `[Adjective] [Property Type] [District]`
 
 ## Recent Updates
 
+### Version 1.2.1 (January 8, 2026)
+- **Bug Fixes**:
+  - Fixed Landlord Performance Analytics charts not rendering in Overview Dashboard
+  - Root cause: Chart initialization was tied to landlord tab instead of overview tab
+  - Solution: Added `initializeLandlordCharts()` call inside `initializeOverviewCharts()` function
+  - All 12 charts (6 overview + 6 landlord performance) now render correctly
+
 ### Version 1.2 (January 2026)
 - **Reorganized Dashboard Structure**:
   - Renamed "Landlord Analytics" tab to "Landlord View"
   - Moved Landlord Performance Analytics (4 stat cards + 6 charts) to Overview Dashboard
   - Landlord View now focuses exclusively on tenant matching and browsing
+- **Enhanced User Experience**:
+  - Added info box to Tenant View explaining AI Smart Match vs Manual Browse approaches
+  - Consistent dual-approach messaging across both Tenant and Landlord views
+  - Removed all emojis from the dashboard for a more professional appearance
+  - Added 2 new charts to Overview Dashboard: Tenant Satisfaction by District and Price Range Distribution
 
 ### Version 1.1 (January 2026)
 - Added AI-Powered Smart Matching for landlord-tenant matching
@@ -686,5 +707,5 @@ Format: `[Adjective] [Property Type] [District]`
 ---
 
 **Last Updated**: January 8, 2026
-**Version**: 1.2
+**Version**: 1.2.1
 **Dashboard File**: Berlin_DSS_Dashboard.html

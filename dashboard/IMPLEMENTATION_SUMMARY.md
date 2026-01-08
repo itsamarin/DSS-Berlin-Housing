@@ -223,12 +223,21 @@ The dashboard has been opened in your browser. To test:
 - 85% verification rate
 - Covers 5 Berlin districts
 
-## Next Steps
+## Recent Bug Fixes (January 8, 2026)
+
+### Fixed: Landlord Performance Analytics Charts Not Rendering
+- **Issue**: After reorganizing the dashboard structure and moving Landlord Performance Analytics from the Landlord tab to the Overview Dashboard, the 6 landlord charts (Revenue by District, Occupancy Trends, Average Price by Room Type, Guest Ratings Distribution, Booking Response Time, Seasonal Revenue Forecast) were not rendering.
+- **Root Cause**: The `initializeLandlordCharts()` function was only being called when the landlord tab was activated, but the charts were now located in the Overview Dashboard.
+- **Fix**: Added `initializeLandlordCharts();` call inside the `initializeOverviewCharts()` function (line 1006-1007 in Berlin_DSS_Dashboard.html) to ensure landlord charts initialize when the Overview tab loads.
+- **Result**: All 12 charts now render correctly in the Overview Dashboard (6 overview charts + 6 landlord performance charts).
+
+## Summary
 
 The implementation is complete and ready to use. The dashboard now has:
 - ✅ AI-Powered Smart Matching with 6+ scoring factors
 - ✅ Advanced Filter Search with occupation and sorting
 - ✅ Enhanced visual indicators and UX improvements
 - ✅ Comprehensive documentation
+- ✅ All charts rendering correctly in Overview Dashboard
 
 You can now use the dashboard to efficiently find ideal tenants for your properties in Berlin!

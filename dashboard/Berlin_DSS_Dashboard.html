@@ -434,6 +434,14 @@
                     <h3 class="chart-title">Monthly Booking Trends</h3>
                     <canvas id="bookingTrendsChart"></canvas>
                 </div>
+                <div class="chart-container">
+                    <h3 class="chart-title">Tenant Satisfaction by District</h3>
+                    <canvas id="satisfactionByDistrictChart"></canvas>
+                </div>
+                <div class="chart-container">
+                    <h3 class="chart-title">Price Range Distribution</h3>
+                    <canvas id="priceRangeChart"></canvas>
+                </div>
             </div>
 
             <h2 style="margin: 3rem 0 1.5rem 0; color: #f59e0b;">Landlord Performance Analytics</h2>
@@ -487,6 +495,15 @@
 
         <!-- Tenant View (Combined Smart Matching + Browse All Listings) -->
         <div id="tenant" class="tab-content">
+            <!-- Info box explaining the two approaches -->
+            <div style="background: linear-gradient(135deg, rgba(236, 72, 153, 0.15), rgba(147, 51, 234, 0.15)); padding: 1.5rem; border-radius: 15px; margin-bottom: 2rem; border-left: 4px solid #ec4899;">
+                <p style="color: #e0e7ff; margin: 0; font-size: 0.95rem;">
+                    <strong style="color: #f9a8d4;">Two Ways to Find Accommodations:</strong><br>
+                    <span style="color: #f9a8d4;">AI Smart Match (Left)</span> - Quick & intelligent. Set your budget and preferences, get instant top 5 personalized recommendations with match scores.<br>
+                    <span style="color: #60a5fa;">Manual Browse (Right)</span> - Full control. Filter, sort, and explore all 1,000+ listings your way.
+                </p>
+            </div>
+
             <div class="two-column-grid">
                 <!-- Left Column: Smart Matching -->
                 <div class="column-section">
@@ -494,7 +511,7 @@
 
                     <!-- Smart Matching Section -->
                     <div class="filters" style="background: linear-gradient(135deg, rgba(236, 72, 153, 0.2), rgba(147, 51, 234, 0.15)); border-left: 4px solid #ec4899;">
-                        <h3 style="color: #f9a8d4; margin-bottom: 1rem;">🎯 AI-Powered Smart Matching</h3>
+                        <h3 style="color: #f9a8d4; margin-bottom: 1rem;">AI-Powered Smart Matching</h3>
                         <p style="color: #e0e7ff; margin-bottom: 1rem; font-size: 0.95rem;">Get personalized recommendations based on your preferences</p>
                         <div class="filter-group">
                             <label>Budget (€):</label>
@@ -525,7 +542,7 @@
                 <div class="column-section">
                     <h2 style="margin-bottom: 1.5rem; color: #60a5fa;">Browse All Listings</h2>
                     <div class="filters" style="background: linear-gradient(135deg, rgba(59, 130, 246, 0.15), rgba(16, 185, 129, 0.15));">
-                        <h3 style="color: #60a5fa; margin-bottom: 1rem;">🔍 Filter Search</h3>
+                        <h3 style="color: #60a5fa; margin-bottom: 1rem;">Filter Search</h3>
                         <div class="filter-group">
                             <label>District:</label>
                             <select id="districtFilter">
@@ -589,26 +606,23 @@
 
         <!-- Landlord View -->
         <div id="landlord" class="tab-content">
-            <!-- Landlord Tenant Matching Section -->
-            <h2 style="margin-bottom: 1.5rem; color: #f59e0b;">Find Your Perfect Tenant & Browse All Applicants</h2>
-
             <!-- Info box explaining the two approaches -->
             <div style="background: linear-gradient(135deg, rgba(236, 72, 153, 0.15), rgba(59, 130, 246, 0.15)); padding: 1.5rem; border-radius: 15px; margin-bottom: 2rem; border-left: 4px solid #ec4899;">
                 <p style="color: #e0e7ff; margin: 0; font-size: 0.95rem;">
-                    <strong style="color: #fbbf24;">💡 Two Ways to Find Tenants:</strong><br>
-                    <span style="color: #fbbf24;">⚡ AI Smart Match (Left)</span> - Quick & intelligent. Enter property details, get instant top 5 ranked matches with compatibility scores.<br>
-                    <span style="color: #60a5fa;">🔍 Manual Browse (Right)</span> - Full control. Filter, sort, and compare all 300 tenants your way.
+                    <strong style="color: #fbbf24;">Two Ways to Find Tenants:</strong><br>
+                    <span style="color: #fbbf24;">AI Smart Match (Left)</span> - Quick & intelligent. Enter property details, get instant top 5 ranked matches with compatibility scores.<br>
+                    <span style="color: #60a5fa;">Manual Browse (Right)</span> - Full control. Filter, sort, and compare all 300 tenants your way.
                 </p>
             </div>
 
             <div class="two-column-grid">
                 <!-- Left Column: Smart Tenant Matching -->
                 <div class="column-section">
-                    <h3 style="margin-bottom: 1.5rem; color: #f9a8d4;">🤖 AI-Powered Smart Matching</h3>
+                    <h3 style="margin-bottom: 1.5rem; color: #f9a8d4;">AI-Powered Smart Matching</h3>
 
                     <!-- Smart Matching Section -->
                     <div class="filters" style="background: linear-gradient(135deg, rgba(245, 158, 11, 0.2), rgba(251, 191, 36, 0.15)); border-left: 4px solid #f59e0b;">
-                        <h3 style="color: #fbbf24; margin-bottom: 1rem;">⚡ Quick Match: Your Best Tenants</h3>
+                        <h3 style="color: #fbbf24; margin-bottom: 1rem;">Quick Match: Your Best Tenants</h3>
                         <p style="color: #e0e7ff; margin-bottom: 1rem; font-size: 0.95rem;">Just enter your property details - AI instantly analyzes 6+ factors (budget fit, income stability, verification, location match, type preference) and ranks top 5 compatible tenants</p>
                         <div class="filter-group">
                             <label>Your Property District:</label>
@@ -669,7 +683,7 @@
                         <span style="background: rgba(59, 130, 246, 0.2); color: #60a5fa; padding: 0.25rem 0.75rem; border-radius: 12px; font-size: 0.75rem; font-weight: 600;">FULL DATABASE</span>
                     </div>
                     <div class="filters" style="background: linear-gradient(135deg, rgba(59, 130, 246, 0.15), rgba(16, 185, 129, 0.15));">
-                        <h3 style="color: #60a5fa; margin-bottom: 1rem;">🔍 Manual Search & Sorting</h3>
+                        <h3 style="color: #60a5fa; margin-bottom: 1rem;">Manual Search & Sorting</h3>
                         <p style="color: #cbd5e1; margin-bottom: 1rem; font-size: 0.9rem;">Browse full database with custom filters and sorting - great for exploring all options or finding specific criteria</p>
                         <div class="filter-group">
                             <label>Preferred District:</label>
@@ -993,6 +1007,91 @@
                 }
             }
         });
+
+        // Tenant Satisfaction by District Chart
+        const satisfactionByDistrictCtx = document.getElementById('satisfactionByDistrictChart').getContext('2d');
+        new Chart(satisfactionByDistrictCtx, {
+            type: 'bar',
+            data: {
+                labels: ['Mitte', 'Kreuzberg', 'Friedrichshain', 'Charlottenburg', 'Prenzlauer Berg'],
+                datasets: [{
+                    label: 'Avg. Satisfaction Score',
+                    data: [4.3, 4.1, 4.4, 4.2, 4.5],
+                    backgroundColor: [
+                        'rgba(16, 185, 129, 0.8)',
+                        'rgba(34, 197, 94, 0.8)',
+                        'rgba(59, 130, 246, 0.8)',
+                        'rgba(245, 158, 11, 0.8)',
+                        'rgba(236, 72, 153, 0.8)'
+                    ],
+                    borderColor: [
+                        '#10b981',
+                        '#22c55e',
+                        '#3b82f6',
+                        '#f59e0b',
+                        '#ec4899'
+                    ],
+                    borderWidth: 2
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: true,
+                plugins: {
+                    legend: { labels: { color: '#f1f5f9' } }
+                },
+                scales: {
+                    y: {
+                        min: 0,
+                        max: 5,
+                        ticks: { color: '#f1f5f9' },
+                        grid: { color: 'rgba(255, 255, 255, 0.1)' },
+                        title: { display: true, text: 'Rating (out of 5)', color: '#f1f5f9' }
+                    },
+                    x: { ticks: { color: '#f1f5f9' }, grid: { color: 'rgba(255, 255, 255, 0.1)' } }
+                }
+            }
+        });
+
+        // Price Range Distribution Chart
+        const priceRangeCtx = document.getElementById('priceRangeChart').getContext('2d');
+        new Chart(priceRangeCtx, {
+            type: 'doughnut',
+            data: {
+                labels: ['< €500', '€500-€800', '€800-€1200', '€1200-€1500', '> €1500'],
+                datasets: [{
+                    data: [180, 450, 820, 520, 349],
+                    backgroundColor: [
+                        'rgba(239, 68, 68, 0.8)',
+                        'rgba(245, 158, 11, 0.8)',
+                        'rgba(59, 130, 246, 0.8)',
+                        'rgba(16, 185, 129, 0.8)',
+                        'rgba(147, 51, 234, 0.8)'
+                    ],
+                    borderColor: [
+                        '#ef4444',
+                        '#f59e0b',
+                        '#3b82f6',
+                        '#10b981',
+                        '#9333ea'
+                    ],
+                    borderWidth: 2
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: true,
+                plugins: {
+                    legend: {
+                        position: 'bottom',
+                        labels: { color: '#f1f5f9', padding: 15 }
+                    }
+                }
+            }
+        });
+
+        // Initialize landlord performance analytics charts (now part of Overview)
+        initializeLandlordCharts();
         }
 
         // Initialize Landlord Charts (lazy loaded)
@@ -1263,7 +1362,7 @@
                         <td>€${listing.price}</td>
                         <td>${listing.rating}/5</td>
                         <td>${listing.distance} km</td>
-                        <td>${listing.verified ? '✓ Yes' : '✗ No'}</td>
+                        <td>${listing.verified ? 'Yes' : 'No'}</td>
                     </tr>
                 `;
                 tbody.innerHTML += row;
@@ -1545,13 +1644,13 @@
             }
 
             scored.forEach((tenant, index) => {
-                const matchQuality = tenant.matchScore >= 80 ? '🌟 Excellent Match' :
-                                   tenant.matchScore >= 65 ? '✨ Good Match' :
-                                   '⭐ Fair Match';
+                const matchQuality = tenant.matchScore >= 80 ? 'Excellent Match' :
+                                   tenant.matchScore >= 65 ? 'Good Match' :
+                                   'Fair Match';
 
-                const incomeIndicator = tenant.incomeRatio >= 3 ? '✓ Meets 3x rule' :
-                                       tenant.incomeRatio >= 2.5 ? '~ Close to 3x rule' :
-                                       '✗ Below 3x rule';
+                const incomeIndicator = tenant.incomeRatio >= 3 ? 'Meets 3x rule' :
+                                       tenant.incomeRatio >= 2.5 ? 'Close to 3x rule' :
+                                       'Below 3x rule';
 
                 const card = `
                     <div class="recommendation-card" style="background: linear-gradient(135deg, rgba(245, 158, 11, 0.2) 0%, rgba(251, 191, 36, 0.1) 100%); border-left-color: #f59e0b;">
@@ -1569,7 +1668,7 @@
                             <div class="detail-item"><strong>Income:</strong> €${tenant.income}/month (${incomeIndicator})</div>
                             <div class="detail-item"><strong>Preferred District:</strong> ${tenant.district}</div>
                             <div class="detail-item"><strong>Preferred Type:</strong> ${tenant.type}</div>
-                            <div class="detail-item"><strong>Verified:</strong> ${tenant.verified ? '✓ Yes' : '✗ No'}</div>
+                            <div class="detail-item"><strong>Verified:</strong> ${tenant.verified ? 'Yes' : 'No'}</div>
                         </div>
                     </div>
                 `;
@@ -1634,8 +1733,8 @@
             // Display filtered results
             paginatedTenants.forEach(tenant => {
                 const verifiedBadge = tenant.verified ?
-                    '<span style="color: #10b981;">✓ Yes</span>' :
-                    '<span style="color: #ef4444;">✗ No</span>';
+                    '<span style="color: #10b981;">Yes</span>' :
+                    '<span style="color: #ef4444;">No</span>';
 
                 const incomeToRentRatio = (tenant.income / tenant.budget).toFixed(1);
                 const incomeColor = incomeToRentRatio >= 3 ? '#10b981' : incomeToRentRatio >= 2.5 ? '#f59e0b' : '#ef4444';
